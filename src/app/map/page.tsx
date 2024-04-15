@@ -1,8 +1,6 @@
 'use client'
-import Image from "next/image"
-import Map from '../../components/Map'
+// import Map from '../../components/Map'
 import dynamic from 'next/dynamic'
-// import "leaflet/dist/leaflet.css"
 import { useMemo } from 'react'
 
 export default function MyPage() {
