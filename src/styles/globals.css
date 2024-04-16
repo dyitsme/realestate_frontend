@@ -43,5 +43,9 @@ body {
 } */
 
 body {
-  overflow-y: hidden
+  overflow-y: hidden;
+}
+
+input:focus {
+  outline: none;
 }

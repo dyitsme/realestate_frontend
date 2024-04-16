@@ -2,6 +2,7 @@
 import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
 import Navbar from '@/components/Navbar'
+import MultiSelect from '@/components/Multiselect'
 
 export default function MyPage() {
   const Map = useMemo(() => dynamic(
@@ -20,36 +21,36 @@ export default function MyPage() {
           <form action="" method="" className="">
             <div className="my-4">
               <label className="font-semibold">Address</label>
-              <input type="text" name="address" id="address" className="block border border-neutral-400 rounded w-full p-1.5"></input>
+              <input type="text" name="address" id="address" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded w-full p-1.5 mt-1"></input>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold">Bedrooms</label>
-                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
               </div>
               <div>
                 <label className="font-semibold">Bathrooms</label>
-                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
               </div>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold">Lot size</label>
-                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
               </div>
               <div>
                 <label className="font-semibold">Floor size</label>
-                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
               </div>
             </div>
             <div className="mb-4">
               <label className="block font-semibold">Age</label>
-              <input type="number" className="block border border-neutral-400 rounded p-1.5 w-28" min="0"></input>
+              <input type="number" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="0"></input>
             </div>
             <div className="mb-4">
               {/* multiselect */}
               <label className="block font-semibold">Amenities</label>
-              <input type="text" className="block border border-neutral-400 rounded w-full p-1.5"></input>
+              <MultiSelect></MultiSelect>
             </div>
             <div className="mb-4">
               <div className="flex items-center justify-center w-full">
