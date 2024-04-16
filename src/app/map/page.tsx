@@ -12,46 +12,69 @@ export default function MyPage() {
     }
   ), [])
 
-
-  return <div>
+  return (
     <div>
       <Navbar/>
-      <h1 className="text-2xl">Enter property details</h1>
-      <form action="" method="POST">
-        <div className="">
-          <label className="block">Number of bedrooms</label>
-          <input type="text" name="bedroom-count" id="bedroom-count" className="block border border-gray-900 rounded" min="1"></input>
+      <div className="flex">
+        <div className="basis-1/4 px-4 overflow-y-scroll h-[90vh]">
+          <form action="" method="" className="">
+            <div className="my-6">
+              <label className="font-semibold">Address</label>
+              <input type="text" name="address" id="address" className="block border border-neutral-400 rounded w-full p-1.5"></input>
+            </div>
+            <div className="flex mb-6 space-x-6">
+              <div>
+                <label className="font-semibold">Bedrooms</label>
+                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+              </div>
+              <div>
+                <label className="font-semibold">Bathrooms</label>
+                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+              </div>
+            </div>
+            <div className="flex mb-6 space-x-6">
+              <div>
+                <label className="font-semibold">Lot size</label>
+                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+              </div>
+              <div>
+                <label className="font-semibold">Floor size</label>
+                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
+              </div>
+            </div>
+            <div className="mb-6">
+              <label className="block font-semibold">Age</label>
+              <input type="number" className="block border border-neutral-400 rounded p-1.5 w-28" min="0"></input>
+            </div>
+            <div className="mb-6">
+              {/* multiselect */}
+              <label className="block font-semibold">Amenities</label>
+              <input type="text" className="block border border-neutral-400 rounded w-full p-1.5"></input>
+            </div>
+            <div className="mb-6">
+              <div className="flex items-center justify-center w-full">
+              <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                        </svg>
+                        <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p className="text-xs text-gray-500">PNG or JPG (MAX SIZE 5MB)</p>
+                    </div>
+                    <input id="dropzone-file" type="file" className="hidden" />
+                </label>
+              </div> 
+            </div>
+            <div className="flex">
+              <button className="text-white bg-neutral-400 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Reset</button>
+              <button type="submit" className="focus:outline-none text-white bg-emerald-600 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
+            </div>
+          </form>
         </div>
-        <div className="">
-          <label className="block">Number of bathrooms</label>
-          <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-gray-900 rounded" min="1"></input>
+        <div className="basis-3/4">
+          <Map />
         </div>
-        <div className="">
-          <label className="block">Address</label>
-          <input type="text" name="address" id="address" className="block border border-gray-900 rounded"></input>
-        </div>
-        <div className="">
-          <label className="block">Lot size (sqm)</label>
-          <input type="number" name="lot-size" id="lot-size" className="block border border-gray-900 rounded" min="1"></input>
-        </div>
-        <div className="">
-          <label className="block">Floor size (sqm)</label>
-          <input type="number" name="floor-size" id="floor-size" className="block border border-gray-900 rounded" min="1"></input>
-        </div>
-        <div className="">
-          <label className="block">Age (yr)</label>
-          <input type="number" className="block border border-gray-900 rounded" min="0"></input>
-        </div>
-        <div className="">
-          {/* multiselect */}
-          <label className="block">Amenities</label>
-          <div className="">
-            <input type="text" className="block border border-gray-900 rounded"></input>
-          </div>
-        </div>
-        <button type="submit" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Calculate</button>
-      </form>
+      </div>
     </div>
-    <Map />
-  </div>
+  )
 }

@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
 const icon = L.icon({ 
-  iconUrl: '/icons/marker-icon.png', 
+  iconUrl: '/icons/marker-icon.png',
   shadowUrl: '/icons/marker-shadow.png' 
 })
 
