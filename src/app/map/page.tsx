@@ -13,16 +13,16 @@ export default function MyPage() {
   ), [])
 
   return (
-    <div>
+    <div className="h-screen">
       <Navbar/>
-      <div className="flex">
-        <div className="basis-1/4 px-4 overflow-y-scroll h-[90vh]">
+      <div className="flex h-full">
+        <div className="basis-1/4 px-4 overflow-y-scroll h-full">
           <form action="" method="" className="">
-            <div className="my-6">
+            <div className="my-4">
               <label className="font-semibold">Address</label>
               <input type="text" name="address" id="address" className="block border border-neutral-400 rounded w-full p-1.5"></input>
             </div>
-            <div className="flex mb-6 space-x-6">
+            <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold">Bedrooms</label>
                 <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
@@ -32,7 +32,7 @@ export default function MyPage() {
                 <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
               </div>
             </div>
-            <div className="flex mb-6 space-x-6">
+            <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold">Lot size</label>
                 <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
@@ -42,18 +42,18 @@ export default function MyPage() {
                 <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 rounded p-1.5 w-28" min="1"></input>
               </div>
             </div>
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block font-semibold">Age</label>
               <input type="number" className="block border border-neutral-400 rounded p-1.5 w-28" min="0"></input>
             </div>
-            <div className="mb-6">
+            <div className="mb-4">
               {/* multiselect */}
               <label className="block font-semibold">Amenities</label>
               <input type="text" className="block border border-neutral-400 rounded w-full p-1.5"></input>
             </div>
-            <div className="mb-6">
+            <div className="mb-4">
               <div className="flex items-center justify-center w-full">
-              <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+              <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
