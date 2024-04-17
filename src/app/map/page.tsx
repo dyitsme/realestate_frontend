@@ -21,31 +21,31 @@ export default function MyPage() {
           <form action="" method="" className="">
             <div className="my-4">
               <label className="font-semibold">Address</label>
-              <input type="text" name="address" id="address" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded w-full p-1.5 mt-1"></input>
+              <input type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1"></input>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold">Bedrooms</label>
-                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
+                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
               </div>
               <div>
                 <label className="font-semibold">Bathrooms</label>
-                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
+                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
               </div>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
-                <label className="font-semibold">Lot size</label>
-                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
+                <label className="font-semibold">Lot size (m<sup>2</sup>)</label>
+                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
               </div>
               <div>
-                <label className="font-semibold">Floor size</label>
-                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="1"></input>
+                <label className="font-semibold">Floor size (m<sup>2</sup>)</label>
+                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
               </div>
             </div>
             <div className="mb-4">
-              <label className="block font-semibold">Age</label>
-              <input type="number" className="block border border-neutral-400 focus:border-2 focus:border-blue-500 rounded p-1.5 w-28 mt-1" min="0"></input>
+              <label className="block font-semibold">Age (yr)</label>
+              <input type="number" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1" min="0"></input>
             </div>
             <div className="mb-4">
               {/* multiselect */}
@@ -67,8 +67,8 @@ export default function MyPage() {
               </div> 
             </div>
             <div className="flex">
-              <button className="text-white bg-neutral-400 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Reset</button>
-              <button type="submit" className="focus:outline-none text-white bg-emerald-600 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
+              <button className="text-white bg-neutral-400 hover:bg-neutral-500 focus:ring-2 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Reset</button>
+              <button type="submit" className="focus:outline-none text-white bg-emerald-600 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
             </div>
           </form>
         </div>
