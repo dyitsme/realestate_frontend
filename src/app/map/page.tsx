@@ -73,6 +73,20 @@ export default function MyPage() {
           </form>
         </div>
         <div className="basis-3/4">
+          <div className="flex bg-zinc-200 justify-around py-2">
+            <div className="text-center bg-white p-2 w-44 rounded">
+              <p className="text-sm">Estimated Price</p>
+              <p className="text-xl">PHP 3200000</p>
+            </div>
+            <div className="text-center bg-white p-2 w-44 rounded">
+              <p className="text-sm">Safety</p>
+              <p className="text-xl">3.3/5</p>
+            </div>
+            <div className="text-center bg-white p-2 w-44 rounded">
+              <p className="text-sm">Nearby amenities</p>
+              <p className="text-xl">10</p>
+            </div>
+          </div>
           <Map />
         </div>
       </div>

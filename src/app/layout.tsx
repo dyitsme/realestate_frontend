@@ -6,7 +6,6 @@ const inter = Inter({ subsets: ["latin"] });
 const openSans = Open_Sans({
   subsets: ['latin'],
 })
-inter.className
 
 export const metadata: Metadata = {
   title: "Create Next App",
