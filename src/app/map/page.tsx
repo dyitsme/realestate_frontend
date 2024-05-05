@@ -12,6 +12,7 @@ export default function MyPage() {
       ssr: false
     }
   ), [])
+  
 
   return (
     <div className="h-screen">
