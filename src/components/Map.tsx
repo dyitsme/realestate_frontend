@@ -26,7 +26,7 @@ const Map = ({coords}) => {
   }, [coords, map])
 
   return (
-    <MapContainer center={[coords.lat, coords.lng]} zoom={13} scrollWheelZoom={false} ref={setMap}>
+    <MapContainer center={[coords.lat, coords.lng]} zoom={13} scrollWheelZoom={true} ref={setMap}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
