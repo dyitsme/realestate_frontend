@@ -1,8 +1,12 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useMemo } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import MultiSelect from '@/components/Multiselect'
+import { useLeafletContext } from '@react-leaflet/core'
+import { useMap } from 'react-leaflet'
+import L from 'leaflet'
+import { useEffect } from 'react'
 
 export default function MyPage() {
   const Map = useMemo(() => dynamic(
@@ -12,16 +16,43 @@ export default function MyPage() {
       ssr: false
     }
   ), [])
+  
+  const [address, setAddress] = useState('')
+  const [coordinates, setCoordinates] = useState({
+    lat: 14.6091, 
+    lng: 121.0223
+  })
+
+  const handleAddressChange = (e: any) => {
+    setAddress(e.target.value);
+  }
+
+  async function handleSubmit(e: any) {
+    e.preventDefault()
+    const url = `http://localhost:3000/api/search/${address}`
+    const response = await fetch(url)
+    const json = await response.json()
+    const newCoordinates = await json.addresses.results[0].geometry.location
+    // console.log("hello")
+    setNewMarker(newCoordinates)
+  }
+
+  function setNewMarker(newCoordinates: any) {
+    // const map = useMap()
+    setCoordinates({ lat: newCoordinates.lat, lng: newCoordinates.lng })
+    // map.panTo({ lat: newCoordinates.lat, lng: newCoordinates.lng })
+  }
+
 
   return (
     <div className="h-screen">
       <Navbar/>
       <div className="flex h-full">
         <div className="basis-1/4 px-4 overflow-y-scroll h-full">
-          <form action="" method="" className="">
+          <form action="" method="" onSubmit={handleSubmit} className="" encType="multipart/form-data">
             <div className="my-4">
               <label className="font-semibold">Address</label>
-              <input type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1"></input>
+              <input onChange={handleAddressChange} type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1"></input>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
@@ -87,7 +118,7 @@ export default function MyPage() {
               <p className="text-xl">10</p>
             </div>
           </div>
-          <Map />
+          <Map coords={coordinates} onCoordinatesChange={setCoordinates}/>
         </div>
       </div>
     </div>
