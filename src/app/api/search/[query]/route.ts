@@ -5,7 +5,7 @@ export async function GET(request: Request, context: any) {
   const { params } = context
   const key = process.env.MAPS_KEY
   
-  const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${params.query}&key=${key}`)
+  const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(params.query)}&key=${key}`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
