@@ -118,7 +118,7 @@ export default function MyPage() {
               <p className="text-xl">10</p>
             </div>
           </div>
-          <Map coords={coordinates} onCoordinatesChange={setCoordinates}/>
+          <Map coords={coordinates}/>
         </div>
       </div>
     </div>

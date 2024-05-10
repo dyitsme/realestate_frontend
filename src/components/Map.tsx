@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet'
 import { useLeafletContext } from '@react-leaflet/core'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -10,14 +10,7 @@ const icon = L.icon({
   shadowUrl: '/icons/marker-shadow.png' 
 })
 
-
 const Map = ({coords}) => {
-  // const map = useMap()
-  // useEffect(() => {
-  //   if (map) {
-  //     map.flyTo({ lat: coords.lat, lng: coords.lng })
-  //   }
-  // }, [coords, map])
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
@@ -36,6 +29,7 @@ const Map = ({coords}) => {
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
+      <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
     </MapContainer>
   )
 }
