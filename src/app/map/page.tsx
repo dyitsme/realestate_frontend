@@ -3,10 +3,12 @@ import dynamic from 'next/dynamic'
 import { useMemo, useRef, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import MultiSelect from '@/components/Multiselect'
+import BarChart from '@/components/BarChart'
 import { useLeafletContext } from '@react-leaflet/core'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { useEffect } from 'react'
+import { Data } from '@/utils/Data'
 
 export default function MyPage() {
   const Map = useMemo(() => dynamic(
@@ -26,6 +28,10 @@ export default function MyPage() {
   const handleAddressChange = (e: any) => {
     setAddress(e.target.value);
   }
+  
+  const [chartData, setChartData] = useState({
+
+  })
 
   async function handleSubmit(e: any) {
     e.preventDefault()
@@ -102,6 +108,7 @@ export default function MyPage() {
               <button type="submit" className="focus:outline-none text-white bg-emerald-600 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
             </div>
           </form>
+          <BarChart></BarChart>
         </div>
         <div className="basis-3/4">
           <div className="flex bg-zinc-200 justify-around py-2">
