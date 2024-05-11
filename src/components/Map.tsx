@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useState, useEffect, useRef } from 'react'
 import floodData from '../../data/MetroManila5yrFlood.json'
+import faultlineData from '../../data/MetroManilaFaultline.json'
 
 
 const icon = L.icon({ 
@@ -20,6 +21,11 @@ const floodStyle = (feature) => {
   }
 }
 
+const faultlineStyle = {
+  color: "blue",
+  weight: 10
+}
+
 const FloodLayer = ({data, floodChecked}) => {
   if (floodChecked) {
     return (
@@ -29,7 +35,15 @@ const FloodLayer = ({data, floodChecked}) => {
     console.log('flood is toggled on')
 }
 
-const Map = ({coords, floodChecked}) => {
+const FaultlineLayer = ({data, earthquakeChecked}) => {
+  if (earthquakeChecked) {
+    return (
+      <GeoJSON data={data} style={faultlineStyle}></GeoJSON>
+    )
+  }
+}
+
+const Map = ({coords, floodChecked, earthquakeChecked}) => {
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
@@ -50,6 +64,7 @@ const Map = ({coords, floodChecked}) => {
       </Marker>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
       <FloodLayer data={floodData} floodChecked={floodChecked}></FloodLayer>
+      <FaultlineLayer data={faultlineData} earthquakeChecked={earthquakeChecked}></FaultlineLayer>
     </MapContainer>
   )
 }

@@ -140,7 +140,7 @@ export default function MyPage() {
               <p className="text-xl">10</p>
             </div>
           </div>
-          <Map coords={coordinates} floodChecked={floodChecked}/>
+          <Map coords={coordinates} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
         </div>
       </div>
     </div>
