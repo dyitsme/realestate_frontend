@@ -26,19 +26,19 @@ const faultlineStyle = {
   weight: 10
 }
 
-const FloodLayer = ({data, floodChecked}) => {
+const FloodLayer = ({floodChecked}) => {
   if (floodChecked) {
     return (
-      <GeoJSON data={data} style={floodStyle}></GeoJSON>
+      <GeoJSON data={floodData} style={floodStyle}></GeoJSON>
     )
   }
     console.log('flood is toggled on')
 }
 
-const FaultlineLayer = ({data, earthquakeChecked}) => {
+const FaultlineLayer = ({earthquakeChecked}) => {
   if (earthquakeChecked) {
     return (
-      <GeoJSON data={data} style={faultlineStyle}></GeoJSON>
+      <GeoJSON data={faultlineData} style={faultlineStyle}></GeoJSON>
     )
   }
 }
@@ -63,8 +63,8 @@ const Map = ({coords, floodChecked, earthquakeChecked}) => {
         </Popup>
       </Marker>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
-      <FloodLayer data={floodData} floodChecked={floodChecked}></FloodLayer>
-      <FaultlineLayer data={faultlineData} earthquakeChecked={earthquakeChecked}></FaultlineLayer>
+      <FloodLayer floodChecked={floodChecked}></FloodLayer>
+      <FaultlineLayer earthquakeChecked={earthquakeChecked}></FaultlineLayer>
     </MapContainer>
   )
 }
