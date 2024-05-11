@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "MetroManilaFaultline",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 6605, "average_dip": "(75,,)", "average_rake": null, "catalog_id": "PHL_31", "catalog_name": "philippines", "dip_dir": "E", "lower_seis_depth": null, "name": "West Valley Fault", "net_slip_rate": null, "slip_type": "Dextral-Normal", "upper_seis_depth": null, "reference": "Rimando and Kneupfer, 2006", "epistemic_quality": null, "accuracy": null, "activity_confidence": null, "fs_name": null, "last_movement": null, "downthrown_side_dir": "E", "vert_sep_rate": "(1.0, 0.5, 1.5)", "strike_slip_rate": "(6.,5.,7.)", "exposure_quality": null, "shortening_rate": null, "notes": null, "downthrown_side_id": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 121.123802727266465, 14.728342007203572 ], [ 121.123742444864263, 14.728210471684459 ] ], [ [ 121.12348580688554, 14.727650490520471 ], [ 121.0907256, 14.65616809 ], [ 121.0806225, 14.63223971 ], [ 121.0669692, 14.56441418 ], [ 121.0653032, 14.55802326 ], [ 121.0600314, 14.54614509 ], [ 121.0561571, 14.52293832 ], [ 121.054528, 14.51656442 ], [ 121.0542873, 14.50379766 ], [ 121.0527245, 14.4878941 ], [ 121.048134, 14.43325907 ], [ 121.0490263, 14.42646924 ], [ 121.0477169, 14.40472032 ], [ 121.0446975, 14.38583577 ], [ 121.041138, 14.37377852 ], [ 121.04067959049965, 14.369491729545496 ] ] ] } }
+]
+}
