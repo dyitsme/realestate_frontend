@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useState, useEffect, useRef } from 'react'
 import floodData from '../../data/MetroManila5yrFlood.json'
+import faultlineData from '../../data/MetroManilaFaultline.json'
 
 
 const icon = L.icon({ 
@@ -40,8 +41,8 @@ const floodStyle = (feature) => {
 }
 
 const faultlineStyle = {
-  color: "blue",
-  weight: 10
+  color: "sienna",
+  weight: 7
 }
 
 const FloodLayer = ({floodChecked}) => {
