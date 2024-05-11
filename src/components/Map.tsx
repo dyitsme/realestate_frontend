@@ -11,11 +11,23 @@ const icon = L.icon({
   shadowUrl: '/icons/marker-shadow.png' 
 })
 
+// const colors = {
+//   low: '#FACC15',
+//   medium: '#FB923C',
+//   high: '#DC2626'
+// }
+
 const colors = {
-  low: '#FACC15',
-  medium: '#FB923C',
-  high: '#DC2626'
+  low: '#6ED3E1',
+  medium: '#0492C2',
+  high: '#1520A6'
 }
+
+// const colors = {
+//   low: '#D8B9EC',
+//   medium: '#917AF8',
+//   high: '#3D46D7'
+// }
 
 const { low, medium, high } = colors
 
