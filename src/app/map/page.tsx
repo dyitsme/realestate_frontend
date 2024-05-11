@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import MultiSelect from '@/components/Multiselect'
 import BarChart from '@/components/BarChart'
+import Toggle from '@/components/Toggle'
 import { useLeafletContext } from '@react-leaflet/core'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
@@ -32,6 +33,18 @@ export default function MyPage() {
   const [chartData, setChartData] = useState({
 
   })
+
+  // floods and earthquake states and functions
+  const [floodChecked, setFloodChecked] = useState(false)
+  const [earthquakeChecked, setEarthquakeChecked] = useState(false)
+
+  function handleFloodChange() {
+    setFloodChecked(!floodChecked)
+  }
+
+  function handleEarthquakeChange() {
+    setEarthquakeChecked(!earthquakeChecked)
+  }
 
   async function handleSubmit(e: any) {
     e.preventDefault()
@@ -108,6 +121,8 @@ export default function MyPage() {
               <button type="submit" className="focus:outline-none text-white bg-emerald-600 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
             </div>
           </form>
+          <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
+          <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
           <BarChart></BarChart>
         </div>
         <div className="basis-3/4">
@@ -125,7 +140,7 @@ export default function MyPage() {
               <p className="text-xl">10</p>
             </div>
           </div>
-          <Map coords={coordinates}/>
+          <Map coords={coordinates} floodChecked={floodChecked}/>
         </div>
       </div>
     </div>

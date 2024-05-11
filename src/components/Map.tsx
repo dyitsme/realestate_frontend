@@ -1,8 +1,9 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON } from 'react-leaflet'
 import { useLeafletContext } from '@react-leaflet/core'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useState, useEffect, useRef } from 'react'
+import floodData from '../../data/MetroManila5yrFlood.json'
 
 
 const icon = L.icon({ 
@@ -10,7 +11,25 @@ const icon = L.icon({
   shadowUrl: '/icons/marker-shadow.png' 
 })
 
-const Map = ({coords}) => {
+
+const floodStyle = (feature) => {
+  switch (feature.properties.Var) {
+    case 1.0: return {color: "#FACC15"}
+    case 2.0: return {color: "#FB923C"}
+    case 3.0: return {color: "#DC2626"}
+  }
+}
+
+const FloodLayer = ({data, floodChecked}) => {
+  if (floodChecked) {
+    return (
+      <GeoJSON data={data} style={floodStyle}></GeoJSON>
+    )
+  }
+    console.log('flood is toggled on')
+}
+
+const Map = ({coords, floodChecked}) => {
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
@@ -19,7 +38,7 @@ const Map = ({coords}) => {
   }, [coords, map])
 
   return (
-    <MapContainer center={[coords.lat, coords.lng]} zoom={13} scrollWheelZoom={true} ref={setMap}>
+    <MapContainer center={[coords.lat, coords.lng]} zoom={15} scrollWheelZoom={true} ref={setMap}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -30,6 +49,7 @@ const Map = ({coords}) => {
         </Popup>
       </Marker>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
+      <FloodLayer data={floodData} floodChecked={floodChecked}></FloodLayer>
     </MapContainer>
   )
 }
