@@ -12,18 +12,37 @@ const icon = L.icon({
   shadowUrl: '/icons/marker-shadow.png' 
 })
 
+// const colors = {
+//   low: '#FACC15',
+//   medium: '#FB923C',
+//   high: '#DC2626'
+// }
+
+const colors = {
+  low: '#6ED3E1',
+  medium: '#0492C2',
+  high: '#1520A6'
+}
+
+// const colors = {
+//   low: '#D8B9EC',
+//   medium: '#917AF8',
+//   high: '#3D46D7'
+// }
+
+const { low, medium, high } = colors
 
 const floodStyle = (feature) => {
   switch (feature.properties.Var) {
-    case 1.0: return {color: "#FACC15"}
-    case 2.0: return {color: "#FB923C"}
-    case 3.0: return {color: "#DC2626"}
+    case 1.0: return {color: low}
+    case 2.0: return {color: medium}
+    case 3.0: return {color: high}
   }
 }
 
 const faultlineStyle = {
-  color: "blue",
-  weight: 10
+  color: "sienna",
+  weight: 7
 }
 
 const FloodLayer = ({floodChecked}) => {
@@ -41,6 +60,47 @@ const FaultlineLayer = ({earthquakeChecked}) => {
       <GeoJSON data={faultlineData} style={faultlineStyle}></GeoJSON>
     )
   }
+}
+
+
+function getColor(hazard) {
+  if (hazard === 'Low') {
+    return low
+  }
+  else if (hazard === 'Medium') {
+    return medium
+  }
+  else if (hazard == 'High') {
+    return high
+  }
+}
+
+const Legend = ({map, floodChecked}) => {
+  useEffect(() => {
+    if (map) {
+      const legend = L.control({ position: "topright" })
+
+      legend.onAdd = () => {
+        let div = L.DomUtil.create('div', 'info legend')
+        let grades = ['Low', 'Medium', 'High']
+        let labels = []
+
+        div.innerHTML += '<h4>Flood risk</h4>'
+        for (let i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+              `<div class="flex-container">
+                <div style="background: ${getColor(grades[i])}"></div>
+                <span>${grades[i]}</span>
+              </div>`
+        }
+  
+        return div;
+      };
+
+      legend.addTo(map);
+    }
+  }, [map]);
+  return null;
 }
 
 const Map = ({coords, floodChecked, earthquakeChecked}) => {
@@ -65,6 +125,7 @@ const Map = ({coords, floodChecked, earthquakeChecked}) => {
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
       <FloodLayer floodChecked={floodChecked}></FloodLayer>
       <FaultlineLayer earthquakeChecked={earthquakeChecked}></FaultlineLayer>
+      <Legend map={map} floodChecked={floodChecked}/>
     </MapContainer>
   )
 }
