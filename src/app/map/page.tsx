@@ -70,36 +70,36 @@ export default function MyPage() {
         <div className="basis-1/4 px-4 overflow-y-scroll h-full">
           <form action="" method="" onSubmit={handleSubmit} className="" encType="multipart/form-data">
             <div className="my-4">
-              <label className="font-semibold">Address</label>
-              <input onChange={handleAddressChange} type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1"></input>
+              <label className="font-semibold text-sm">Address</label>
+              <input onChange={handleAddressChange} type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1 text-sm"></input>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
-                <label className="font-semibold">Bedrooms</label>
-                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
+                <label className="font-semibold text-sm">Bedrooms</label>
+                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
               <div>
-                <label className="font-semibold">Bathrooms</label>
-                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
+                <label className="font-semibold text-sm">Bathrooms</label>
+                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
-                <label className="font-semibold">Lot size (m<sup>2</sup>)</label>
-                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
+                <label className="font-semibold text-sm">Lot size (m<sup>2</sup>)</label>
+                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
               <div>
-                <label className="font-semibold">Floor size (m<sup>2</sup>)</label>
-                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1" min="1"></input>
+                <label className="font-semibold text-sm">Floor size (m<sup>2</sup>)</label>
+                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
             </div>
             <div className="mb-4">
-              <label className="block font-semibold">Age (yr)</label>
-              <input type="number" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1" min="0"></input>
+              <label className="block font-semibold text-sm">Age (yr)</label>
+              <input type="number" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
             </div>
             <div className="mb-4">
               {/* multiselect */}
-              <label className="block font-semibold">Amenities</label>
+              <label className="block font-semibold text-sm">Amenities</label>
               <MultiSelect></MultiSelect>
             </div>
             <div className="mb-4">
