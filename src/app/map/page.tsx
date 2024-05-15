@@ -10,6 +10,7 @@ import { useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { useEffect } from 'react'
 import { Data } from '@/utils/Data'
+import Searchbar from '@/components/Searchbar'
 
 export default function MyPage() {
   const Map = useMemo(() => dynamic(
@@ -22,7 +23,7 @@ export default function MyPage() {
   
   const [address, setAddress] = useState('')
   const [coordinates, setCoordinates] = useState({
-    lat: 14.6091, 
+    lat: 14.6091,   
     lng: 121.0223
   })
 
@@ -46,6 +47,15 @@ export default function MyPage() {
     setEarthquakeChecked(!earthquakeChecked)
   }
 
+  // addresses
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchData, setSearchData] = useState([])
+
+  
+  // function handleSearchQuery(searchQuery) {
+  //   setSearchQuery(searchQuery)
+  // }
+
   async function handleSubmit(e: any) {
     e.preventDefault()
     const url = `http://localhost:3000/api/search/${address}`
@@ -57,9 +67,7 @@ export default function MyPage() {
   }
 
   function setNewMarker(newCoordinates: any) {
-    // const map = useMap()
     setCoordinates({ lat: newCoordinates.lat, lng: newCoordinates.lng })
-    // map.panTo({ lat: newCoordinates.lat, lng: newCoordinates.lng })
   }
 
 
@@ -69,10 +77,11 @@ export default function MyPage() {
       <div className="flex h-full">
         <div className="basis-1/4 px-4 overflow-y-scroll h-full">
           <form action="" method="" onSubmit={handleSubmit} className="" encType="multipart/form-data">
-            <div className="my-4">
+            {/* <div className="my-4">
               <label className="font-semibold text-sm">Address</label>
               <input onChange={handleAddressChange} type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1 text-sm"></input>
-            </div>
+            </div> */}
+            <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates}></Searchbar>
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold text-sm">Bedrooms</label>

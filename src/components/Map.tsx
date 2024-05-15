@@ -107,7 +107,7 @@ const Map = ({coords, floodChecked, earthquakeChecked}) => {
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
-      map.flyTo({ lat: coords.lat, lng: coords.lng })
+      map.flyTo({ lat: coords.lat, lng: coords.lng }, 14)
     }
   }, [coords, map])
 
