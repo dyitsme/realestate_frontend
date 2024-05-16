@@ -1,9 +1,26 @@
 import { useState } from 'react'
 
-let queryTimeout = null
+let queryTimeout: any = null
+const Address = ({street, city, country}) => {
+  const addressParts = [street, city, country].filter(part => part); // Filters out falsy values (null, undefined, empty strings)
+  const formattedAddress = addressParts.join(', ');
+
+  return (
+      <div>
+          <p>{formattedAddress}</p>
+      </div>
+  )
+}
+
 const Searchbar = ({searchQuery, setSearchQuery, searchData, setSearchData, setCoordinates}) => {
 
-  let searchValue
+  let searchValue: any
+
+  function formatAddress(name, street, city, country) {
+    const addressParts = [name, street, city, country].filter(part => part); // Filters out falsy values (null, undefined, empty strings)
+    const formattedAddress = addressParts.join(', ');
+    return formattedAddress
+  }
 
   function handleSearch(e) {
     handleSearchChange(e.target.value)
@@ -16,11 +33,11 @@ const Searchbar = ({searchQuery, setSearchQuery, searchData, setSearchData, setC
   }
 
   // pins the location and updates the selected result
-  function handleSelectedResult(result) {
+  function handleSelectedResult(result: any) {
     // lat and lng
     // in geojson, the format is lng and lat, so had to reverse the ordering
     setCoordinates({lat: result.geometry.coordinates[1], lng: result.geometry.coordinates[0]})
-    setSearchQuery(result.properties.name)
+    setSearchQuery(formatAddress(result.properties.name, result.properties.street, result.properties.city, result.properties.country))
     clearSearchResults()
   }
 
@@ -53,20 +70,20 @@ const Searchbar = ({searchQuery, setSearchQuery, searchData, setSearchData, setC
   return (
     <div className="my-4 relative">
       <label className="font-semibold text-sm">Address</label>
-      <input value={searchQuery} onChange={handleSearch} onFocus={handleSearch} onBlur={clearSearchResults} type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1 text-sm"></input>
+      <input value={searchQuery} onChange={handleSearch} type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1 text-sm"></input>
       {/* dropdown */}
       <div className="z-10 absolute mt-2 w-full bg-white shadow-md rounded-md">
       {/* dropdown results */}
-        {searchData.map((result, index) => (
-          <div className="text-sm hover:bg-neutral-200 cursor-pointer p-2" key={index} onClick={() => handleSelectedResult(result)}>
-            <div className="font-medium">
-              {result.properties.name}
-            </div>
-            <div>
-              {result.properties.street}, {result.properties.city}, {result.properties.country}
-            </div>
+      {searchData.map((result: any, index: any) => (
+        <div className="text-sm hover:bg-neutral-200 cursor-pointer p-2" key={index} onClick={() => handleSelectedResult(result)}>
+          <div className="font-medium">
+            {result.properties.name}
           </div>
-        ))}
+          <div>
+            <Address street={result.properties.street} city={result.properties.city} country={result.properties.country} />
+          </div>
+        </div>
+      ))}
       </div>
     </div>
   )
