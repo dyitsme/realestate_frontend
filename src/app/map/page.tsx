@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import MultiSelect from '@/components/Multiselect'
 import BarChart from '@/components/BarChart'
+import AmenityCart from '@/components/AmenityCart'
 import Toggle from '@/components/Toggle'
 import { useLeafletContext } from '@react-leaflet/core'
 import { useMap } from 'react-leaflet'
@@ -110,7 +111,7 @@ export default function MyPage() {
             <div className="mb-4">
               {/* multiselect */}
               <label className="block font-semibold text-sm">Amenities</label>
-              <MultiSelect></MultiSelect>
+              <AmenityCart/>
             </div>
             <div className="mb-4">
               <div className="flex items-center justify-center w-full">
@@ -136,7 +137,7 @@ export default function MyPage() {
           </form>
           <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
           <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
-          <BarChart></BarChart>
+          <BarChart/>
         </div>
         <div className="basis-3/4">
           <div className="flex bg-zinc-200 justify-around py-2">
