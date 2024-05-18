@@ -37,16 +37,7 @@ const AmenitySearch = ({searchQuery, setSearchQuery}) => {
   )
 }
 
-const AmenityCart = () => {
-  
-  const [searchQuery, setSearchQuery] = useState('')
-  const amenitiesArray = amenitiesData.map(amenity => ({
-    amenity: amenity,
-    qty: 1,
-    isSelected: false
-  }))
-  const [amenities, setAmenities] = useState(amenitiesArray)
-
+const AmenityCart = ({searchQuery, setSearchQuery, amenities, setAmenities}) => {
   return (
     <div>
       <AmenitySearch searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>

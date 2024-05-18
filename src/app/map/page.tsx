@@ -11,6 +11,7 @@ import L from 'leaflet'
 import { useEffect } from 'react'
 import Searchbar from '@/components/Searchbar'
 import Image from 'next/image'
+import amenitiesData from '../../../data/AmenityData'
 
 export default function MyPage() {
   const Map = useMemo(() => dynamic(
@@ -20,21 +21,38 @@ export default function MyPage() {
       ssr: false
     }
   ), [])
-  
+
+  // form values
   const [address, setAddress] = useState('')
   const [coordinates, setCoordinates] = useState({
     lat: 14.6091,   
     lng: 121.0223
   })
+  const [bedrooms, setBedrooms] = useState('')
+  const [bathrooms, setBathrooms] = useState('')
+  const [lotSize, setLotSize] = useState('')
+  const [floorArea, setFloorArea] = useState('')
+  const [age, setAge] = useState('')
+  const [image, setImage] = useState('')
+  const [imageName, setImageName] = useState('')
+
+  // amenities
+  const [amenitySearchQuery, setAmenitySearchQuery] = useState('')
+  const amenitiesArray = amenitiesData.map(amenity => ({
+    amenity: amenity,
+    qty: 1,
+    isSelected: false
+  }))
+  const [amenities, setAmenities] = useState(amenitiesArray)
+
+  // addresses
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchData, setSearchData] = useState([])
 
   const handleAddressChange = (e: any) => {
     setAddress(e.target.value);
   }
   
-  const [chartData, setChartData] = useState({
-
-  })
-
   // floods and earthquake states and functions
   const [floodChecked, setFloodChecked] = useState(false)
   const [earthquakeChecked, setEarthquakeChecked] = useState(false)
@@ -47,29 +65,35 @@ export default function MyPage() {
     setEarthquakeChecked(!earthquakeChecked)
   }
 
-  // addresses
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchData, setSearchData] = useState([])
-
-  
-  // function handleSearchQuery(searchQuery) {
-  //   setSearchQuery(searchQuery)
-  // }
+  function uploadImage(e: any) {
+    setImage(e.target.files[0])
+    setImageName(e.target.files[0].name)
+  }
 
   async function handleSubmit(e: any) {
     e.preventDefault()
-    const url = `http://localhost:3000/api/search/${address}`
-    const response = await fetch(url)
-    const json = await response.json()
-    const newCoordinates = await json.addresses.results[0].geometry.location
-    // console.log("hello")
-    setNewMarker(newCoordinates)
-  }
+    const data = new FormData()
+    const selectedAmenities = []
+    for (let i = 0; i < amenities.length; i++) {
+      // console.log(amenities[i].isSelected)
+      if (amenities[i].isSelected === true) {
+        selectedAmenities.push(amenities[i])
+      }
+    }
 
-  function setNewMarker(newCoordinates: any) {
-    setCoordinates({ lat: newCoordinates.lat, lng: newCoordinates.lng })
-  }
+    data.append('coords', JSON.stringify(coordinates))
+    data.append('bedrooms', bedrooms)
+    data.append('bathrooms', bathrooms)
+    data.append('lotSize', lotSize)
+    data.append('floorArea', floorArea)
+    data.append('age', age)
+    data.append('amenities', JSON.stringify(selectedAmenities))
+    data.append('image', image)
 
+    for (const value of data.values()) {
+      console.log(value);
+    }
+  }
 
   return (
     <div className="h-screen">
@@ -77,54 +101,48 @@ export default function MyPage() {
       <div className="flex h-full">
         <div className="basis-1/4 px-4 overflow-y-scroll h-full">
           <form action="" method="" onSubmit={handleSubmit} className="" encType="multipart/form-data">
-            {/* <div className="my-4">
-              <label className="font-semibold text-sm">Address</label>
-              <input onChange={handleAddressChange} type="text" name="address" id="address" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1 text-sm"></input>
-            </div> */}
             <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates}></Searchbar>
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold text-sm">Bedrooms</label>
-                <input type="number" name="bedroom-count" id="bedroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <input type="number" name="bedroom-count" id="bedroom-count" value={bedrooms} onChange={event => setBedrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
               <div>
                 <label className="font-semibold text-sm">Bathrooms</label>
-                <input type="number" name="bathroom-count" id="bathroom-count" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <input type="number" name="bathroom-count" id="bathroom-count" value={bathrooms} onChange={event => setBathrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold text-sm">Lot size (m<sup>2</sup>)</label>
-                <input type="number" name="lot-size" id="lot-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <input type="number" name="lot-size" id="lot-size" value={lotSize} onChange={event => setLotSize(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
               <div>
                 <label className="font-semibold text-sm">Floor size (m<sup>2</sup>)</label>
-                <input type="number" name="floor-size" id="floor-size" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <input type="number" name="floor-size" id="floor-size" value={floorArea} onChange={event => setFloorArea(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
               </div>
             </div>
             <div className="mb-4">
               <label className="block font-semibold text-sm">Age (yr)</label>
-              <input type="number" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+              <input type="number" value={age} onChange={event => setAge(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
             </div>
             <div className="mb-4">
               {/* multiselect */}
               <label className="block font-semibold text-sm">Amenities</label>
-              <AmenityCart/>
+              <AmenityCart searchQuery={amenitySearchQuery} setSearchQuery={setAmenitySearchQuery} amenities={amenities} setAmenities={setAmenities}/>
             </div>
             <div className="mb-4">
               <div className="flex items-center justify-center w-full">
               <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        {/* <svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                        </svg> */}
                         <div className="mb-4">
                           <Image src="/upload.svg" width={40} height={40} alt="upload"></Image>
                         </div>
+                        <p>{imageName}</p>
                         <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload</span> or drag and drop</p>
                         <p className="text-xs text-gray-500">PNG or JPG (MAX SIZE 5MB)</p>
                     </div>
-                    <input id="dropzone-file" type="file" className="hidden" />
+                    <input id="dropzone-file" type="file" accept="image/*" className="hidden" onChange={event => uploadImage(event)} />
                 </label>
               </div> 
             </div>
