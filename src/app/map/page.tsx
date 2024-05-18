@@ -115,16 +115,16 @@ export default function MyPage() {
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold text-sm">Lot size (m<sup>2</sup>)</label>
-                <input type="number" name="lot-size" id="lot-size" value={lotSize} onChange={event => setLotSize(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <input type="number" name="lot-size" id="lot-size" value={lotSize} onChange={event => setLotSize(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1" step=".01"></input>
               </div>
               <div>
                 <label className="font-semibold text-sm">Floor size (m<sup>2</sup>)</label>
-                <input type="number" name="floor-size" id="floor-size" value={floorArea} onChange={event => setFloorArea(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <input type="number" name="floor-size" id="floor-size" value={floorArea} onChange={event => setFloorArea(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1" step=".01"></input>
               </div>
             </div>
             <div className="mb-4">
               <label className="block font-semibold text-sm">Age (yr)</label>
-              <input type="number" value={age} onChange={event => setAge(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+              <input type="number" value={age} onChange={event => setAge(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
             </div>
             <div className="mb-4">
               {/* multiselect */}
