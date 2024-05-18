@@ -93,3 +93,8 @@ body {
   margin: 0 0 5px;
   color: #777;
 }
+
+.amenity-checkbox {
+  min-width: 16px;
+  min-height: 16px;
+}
