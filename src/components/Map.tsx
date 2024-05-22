@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON, useMapEvents } from 'react-leaflet'
 import { useLeafletContext } from '@react-leaflet/core'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -103,7 +103,31 @@ const Legend = ({map, floodChecked}) => {
   return null;
 }
 
-const Map = ({coords, floodChecked, earthquakeChecked}) => {
+// once a marker has been created by clicking onto the map, it should update the latlng state
+// address search bar should contain the latlng of the newly created marker
+const LocationMarker = ({searchedCoords, setCoords, setSearchQuery}) => {
+  const map = useMapEvents({
+    click(e) {
+      // update coordinate position and search query from main page
+      setCoords({
+        lat: e.latlng.lat,
+        lng: e.latlng.lng
+      })
+      setSearchQuery(`${e.latlng.lat}, ${e.latlng.lng}`)
+      map.flyTo(e.latlng, map.getZoom())
+      // console.log(e.latlng.lat)
+    }
+  })
+
+  return (
+    <Marker position={searchedCoords} icon={icon}>
+      <Popup>You are here</Popup>
+    </Marker>
+  )
+}
+
+
+const Map = ({coords, setCoords, setSearchQuery, floodChecked, earthquakeChecked}) => {
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
@@ -111,17 +135,14 @@ const Map = ({coords, floodChecked, earthquakeChecked}) => {
     }
   }, [coords, map])
 
+
   return (
     <MapContainer center={[coords.lat, coords.lng]} zoom={15} scrollWheelZoom={true} ref={setMap}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[coords.lat, coords.lng]} icon={icon}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+      <LocationMarker searchedCoords={coords} setCoords={setCoords} setSearchQuery={setSearchQuery}/>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
       <FloodLayer floodChecked={floodChecked}></FloodLayer>
       <FaultlineLayer earthquakeChecked={earthquakeChecked}></FaultlineLayer>

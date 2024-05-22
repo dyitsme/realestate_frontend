@@ -62,7 +62,7 @@ const Searchbar = ({searchQuery, setSearchQuery, searchData, setSearchData, setC
         
         setSearchData(json.addresses.features)
       } 
-    }, 500)
+    }, 250)
     
   }
 

@@ -91,8 +91,22 @@ export default function MyPage() {
     data.append('image', image)
 
     for (const value of data.values()) {
-      console.log(value);
+      console.log(value)
     }
+    try {
+      const url = ''
+      const response = await fetch(url, {
+        method: 'POST',
+        body: data
+      })
+      if (response.ok) {
+        // do something
+      }
+    }
+    catch(err) {
+
+    }
+
   }
 
   return (
@@ -156,21 +170,7 @@ export default function MyPage() {
           <BarChart/>
         </div>
         <div className="basis-3/4">
-          <div className="flex bg-zinc-200 justify-around py-2">
-            <div className="text-center bg-white p-2 w-44 rounded">
-              <p className="text-sm">Estimated Price</p>
-              <p className="text-xl">PHP 3200000</p>
-            </div>
-            <div className="text-center bg-white p-2 w-44 rounded">
-              <p className="text-sm">Safety</p>
-              <p className="text-xl">3.3/5</p>
-            </div>
-            <div className="text-center bg-white p-2 w-44 rounded">
-              <p className="text-sm">Nearby amenities</p>
-              <p className="text-xl">10</p>
-            </div>
-          </div>
-          <Map coords={coordinates} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
+          <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
         </div>
       </div>
     </div>
