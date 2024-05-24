@@ -235,13 +235,12 @@ export default function MyPage() {
           </form>
           <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
           <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
-          {/* <BarChart/> */}
         </div>
         <div className="basis-3/5">
           <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
         </div>
         <div className="basis-1/5">
-
+          <BarChart/>
         </div>
       </div>
     </div>
