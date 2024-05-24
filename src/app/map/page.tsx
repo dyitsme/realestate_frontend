@@ -49,7 +49,7 @@ export default function MyPage() {
   const [amenitySearchQuery, setAmenitySearchQuery] = useState('')
   const amenitiesArray = amenitiesData.map(amenity => ({
     amenity: amenity,
-    qty: 1,
+    qty: 0,
     isSelected: false
   }))
   const [amenities, setAmenities] = useState(amenitiesArray)
