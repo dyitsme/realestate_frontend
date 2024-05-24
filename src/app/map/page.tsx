@@ -117,6 +117,10 @@ export default function MyPage() {
     }
 
   }
+  
+  const resetSearchResult = () => {
+    setSearchData([]);
+  };
 
   function resetForm() {
     setAddress('')
@@ -262,7 +266,7 @@ export default function MyPage() {
           {/* <BarChart/> */}
         </div>
         <div className="basis-3/5">
-          <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
+          <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked} resetSearchResult={resetSearchResult}/>
         </div>
         <div className="basis-1/5">
 
