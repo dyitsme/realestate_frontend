@@ -236,8 +236,10 @@ export default function MyPage() {
           <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
           <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
         </div>
-        <div className="basis-3/5">
-          <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
+        <div className="flex-1 relative">
+          <div className="basis-3/5">
+            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
+          </div>
         </div>
         <div className="basis-1/5">
           <BarChart/>
