@@ -131,7 +131,7 @@ const Map = ({coords, setCoords, setSearchQuery, floodChecked, earthquakeChecked
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
-      map.flyTo({ lat: coords.lat, lng: coords.lng }, 14)
+      map.flyTo({ lat: coords.lat, lng: coords.lng }, map.getZoom())
     }
   }, [coords, map])
 

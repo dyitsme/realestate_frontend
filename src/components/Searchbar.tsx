@@ -89,36 +89,38 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
   }
 
   return (
-    <div className="my-4 relative" ref={searchbarRef}>
-      <label className="font-semibold text-sm">Address</label>
-      <input
-        value={searchQuery}
-        onChange={handleSearch}
-        onFocus={handleFocus} // Add onFocus event
-        type="text"
-        name="address"
-        id="address"
-        className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1 text-sm"
-      />
-      {isDropdownVisible && searchData.length > 0 && (
-        <div className="z-10 absolute mt-2 w-full bg-white shadow-md rounded-md">
-          {searchData.map((result, index) => (
-            <div
-              className="text-sm hover:bg-neutral-200 cursor-pointer p-2"
-              key={index}
-              onClick={() => handleSelectedResult(result)}
-            >
-              <div className="font-medium">
-                {result.properties.name}
+    <div className="my-4 relative">
+      <label className="font-semibold text-sm">Location</label>
+      <div className="" ref={searchbarRef}>
+        <input
+          value={searchQuery}
+          onChange={handleSearch}
+          onFocus={handleFocus} // Add onFocus event
+          type="text"
+          name="address"
+          id="address"
+          className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded w-full p-1.5 mt-1 text-sm"
+        />
+        {isDropdownVisible && searchData.length > 0 && (
+          <div className="z-10 absolute mt-2 w-full bg-white shadow-md rounded-md">
+            {searchData.map((result, index) => (
+              <div
+                className="text-sm hover:bg-neutral-200 cursor-pointer p-2"
+                key={index}
+                onClick={() => handleSelectedResult(result)}
+              >
+                <div className="font-medium">
+                  {result.properties.name}
+                </div>
+                <div>
+                  <Address street={result.properties.street} city={result.properties.city} country={result.properties.country} />
+                </div>
               </div>
-              <div>
-                <Address street={result.properties.street} city={result.properties.city} country={result.properties.country} />
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+            ))}
+          </div>
+        )}
+      </div>
+  </div>
   );
 };
 

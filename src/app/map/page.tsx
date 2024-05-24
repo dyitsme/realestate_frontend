@@ -28,11 +28,20 @@ export default function MyPage() {
     lat: 14.6091,   
     lng: 121.0223
   })
+
   const [bedrooms, setBedrooms] = useState('')
   const [bathrooms, setBathrooms] = useState('')
   const [lotSize, setLotSize] = useState('')
   const [floorArea, setFloorArea] = useState('')
   const [age, setAge] = useState('')
+  const [totalFloors, setTotalFloors] = useState('')
+  const [carSpaces, setCarSpaces] = useState('')
+
+  const [operation, setOperation] = useState('')
+  const [saleType, setSaleType] = useState('')
+  const [furnishing, setFurnishing] = useState('')
+  const [propertyType, setPropertyType] = useState('')
+
   const [image, setImage] = useState('')
   const [imageName, setImageName] = useState('')
 
@@ -113,32 +122,91 @@ export default function MyPage() {
     <div className="h-screen">
       <Navbar/>
       <div className="flex h-full">
-        <div className="basis-1/4 px-4 overflow-y-scroll h-full">
+        <div className="basis-1/5 px-4 pb-16 overflow-y-scroll h-[100%]">
           <form action="" method="" onSubmit={handleSubmit} className="" encType="multipart/form-data">
             <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates}></Searchbar>
             <div className="flex mb-4 space-x-6">
               <div>
-                <label className="font-semibold text-sm">Bedrooms</label>
-                <input type="number" name="bedroom-count" id="bedroom-count" value={bedrooms} onChange={event => setBedrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <label className="font-semibold text-sm">No. of bedrooms</label>
+                <input type="number" name="bedroom-count" id="bedroom-count" value={bedrooms} onChange={event => setBedrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="1"></input>
               </div>
               <div>
-                <label className="font-semibold text-sm">Bathrooms</label>
-                <input type="number" name="bathroom-count" id="bathroom-count" value={bathrooms} onChange={event => setBathrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1"></input>
+                <label className="font-semibold text-sm">No. of bathrooms</label>
+                <input type="number" name="bathroom-count" id="bathroom-count" value={bathrooms} onChange={event => setBathrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="1"></input>
               </div>
             </div>
             <div className="flex mb-4 space-x-6">
               <div>
                 <label className="font-semibold text-sm">Lot size (m<sup>2</sup>)</label>
-                <input type="number" name="lot-size" id="lot-size" value={lotSize} onChange={event => setLotSize(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1" step=".01"></input>
+                <input type="number" name="lot-size" id="lot-size" value={lotSize} onChange={event => setLotSize(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
               </div>
               <div>
                 <label className="font-semibold text-sm">Floor size (m<sup>2</sup>)</label>
-                <input type="number" name="floor-size" id="floor-size" value={floorArea} onChange={event => setFloorArea(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-32 mt-1 text-sm" min="1" step=".01"></input>
+                <input type="number" name="floor-size" id="floor-size" value={floorArea} onChange={event => setFloorArea(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
               </div>
             </div>
-            <div className="mb-4">
-              <label className="block font-semibold text-sm">Age (yr)</label>
-              <input type="number" value={age} onChange={event => setAge(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
+            <div className="flex mb-4 space-x-6">
+              <div>
+                <label className="font-semibold text-sm">Age (yr)</label>
+                <input type="number" value={age} onChange={event => setAge(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+              </div>
+              <div>
+                <label className="font-semibold text-sm">No. of floors</label>
+                <input type="number" value={totalFloors} onChange={event => setTotalFloors(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+              </div>
+            </div>
+            <div>
+              <label className="font-semibold text-sm">No. of car spaces</label>
+              <input type="number" value={carSpaces} onChange={event => setCarSpaces(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+            </div>
+            {/* radio options */}
+            <div className="grid grid-cols-2 gap-y-3 my-4">
+              <div className="flex flex-col">
+                <p className="font-semibold text-sm justify-around">Operation</p>
+                <div className="flex items-center gap-x-1">
+                  <input type="radio" name="operation"/>
+                  <label className="text-sm">Buy</label>
+                </div>
+                <div className="flex items-center gap-x-1">
+                  <input type="radio" name="operation"/>
+                  <label className="text-sm">Rent</label>
+                </div>
+              </div>
+              <div className="flex flex-col justify-around">
+                <p className="font-semibold text-sm">Sale type</p>
+                <div className="flex items-center gap-x-1">
+                  <input type="radio" name="saleType"/>
+                  <label className="text-sm">New</label>
+                </div>
+                <div className="flex items-center gap-x-1">
+                  <input type="radio" name="saleType"/>
+                  <label className="text-sm">Resale</label>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <p className="font-semibold text-sm justify-around">Furnishing</p>
+                <div className="flex items-center gap-x-1">
+                  <input type="radio" name="furnishing"/>
+                  <label className="text-sm">Unfurnished</label>
+                </div>
+                <div className="flex items-center gap-x-1">
+                  <input type="radio" name="furnishing"/>
+                  <label className="text-sm">Semi-furnished</label>
+                </div>
+                <div className="flex items-center gap-x-1">
+                  <input type="radio" name="furnishing"/>
+                  <label className="text-sm">Furnished</label>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <label className="font-semibold text-sm">Property type</label>
+              <select name="propertyType" className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 mt-1 text-sm">
+                <option value="">House</option>
+                <option value="">Apartment</option>
+                <option value="">Condominium</option>
+                <option value="">Land</option>
+              </select>
             </div>
             <div className="mb-4">
               {/* multiselect */}
@@ -162,15 +230,18 @@ export default function MyPage() {
             </div>
             <div className="flex">
               <button className="text-white bg-neutral-400 hover:bg-neutral-500 focus:ring-2 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Reset</button>
-              <button type="submit" className="focus:outline-none text-white bg-emerald-600 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
+              <button type="submit" className="focus:outline-none text-white bg-sky-500 hover:bg-sky-600 focus:ring-2 focus:ring-sky-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
             </div>
           </form>
           <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
           <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
-          <BarChart/>
+          {/* <BarChart/> */}
         </div>
-        <div className="basis-3/4">
+        <div className="basis-3/5">
           <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
+        </div>
+        <div className="basis-1/5">
+
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ const AmenityCard = ({amenity, setAmenities}) => {
 const AmenitySearch = ({searchQuery, setSearchQuery}) => {  
   return(
     <div>
-      <input type="text" name="amenity" id="amenity" value={searchQuery} onChange={event => setSearchQuery(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-sky-600 rounded w-full p-1.5 mt-1 text-sm"></input>
+      <input type="text" name="amenity" id="amenity" value={searchQuery} onChange={event => setSearchQuery(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded w-full p-1.5 mt-1 text-sm"></input>
     </div>
   )
 }
