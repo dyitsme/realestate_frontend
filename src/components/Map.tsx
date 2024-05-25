@@ -9,7 +9,9 @@ import faultlineData from '../../data/MetroManilaFaultline.json'
 
 const icon = L.icon({ 
   iconUrl: '/icons/marker-icon.png',
-  shadowUrl: '/icons/marker-shadow.png' 
+  shadowUrl: '/icons/marker-shadow.png' ,
+  iconSize: [24, 36],
+  iconAnchor: [12,36]
 })
 
 // const colors = {

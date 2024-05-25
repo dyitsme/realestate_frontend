@@ -89,7 +89,7 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
   }
 
   return (
-    <div className="my-4 relative">
+    <div className="my-2 relative">
       <label className="font-semibold text-sm">Location</label>
       <div className="" ref={searchbarRef}>
         <input
@@ -100,6 +100,7 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
           name="address"
           id="address"
           className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded w-full p-1.5 mt-1 text-sm"
+          placeholder="Search..."
         />
         {isDropdownVisible && searchData.length > 0 && (
           <div className="z-10 absolute mt-2 w-full bg-white shadow-md rounded-md">
