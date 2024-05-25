@@ -1,7 +1,7 @@
 const Toggle = ({label, value, onChange}) => {
   return (
     <div className="inline-flex items-center mr-4">
-      <span className="mr-4 text-sm font-medium text-gray-900">{label}</span>
+      <span className="mr-4 text-sm font-medium text-neutral-700">{label}</span>
       <label className="relative inline-flex cursor-pointer items-center">
         <input id="switch" type="checkbox" checked={value} onChange={onChange} className="peer sr-only"/>
         <label htmlFor="switch" className="hidden"></label>

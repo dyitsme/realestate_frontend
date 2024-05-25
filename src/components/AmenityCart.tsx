@@ -20,10 +20,10 @@ const AmenityCard = ({ amenity, setAmenities }) => {
   }
 
   return (
-    <div className="flex justify-between bg-gray-100 my-2 p-2 rounded-sm">
+    <div className="flex justify-between bg-neutral-100 my-2 p-2 rounded-sm">
       <label className="flex items-center">
         <input type="checkbox" className="amenity-checkbox m-2" checked={amenity.isSelected} onChange={toggleAmenity}></input>
-        <p className="text-sm">{amenity.amenity}</p>
+        <p className="text-sm text-neutral-700">{amenity.amenity}</p>
       </label>
       <input
         type="number"
@@ -40,15 +40,21 @@ const AmenityCard = ({ amenity, setAmenities }) => {
 const AmenitySearch = ({ searchQuery, setSearchQuery }) => {
   return (
     <div>
-      <input type="text" name="amenity" id="amenity" value={searchQuery} onChange={event => setSearchQuery(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded w-full p-1.5 mt-1 text-sm"></input>
+      <input type="text" name="amenity" id="amenity" value={searchQuery} onChange={event => setSearchQuery(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded w-full p-1.5 mt-1 text-sm" placeholder="Search..."></input>
     </div>
   )
 }
 
 const AmenityCart = ({ searchQuery, setSearchQuery, amenities, setAmenities }) => {
+  function isSelected(amenity) {
+    if (amenity.isSelected) {
+      return amenity
+    }
+  }
   return (
-    <div>
+    <div className="grid grid-col-1 gap-2">
       <AmenitySearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <p>{ amenities.filter(isSelected).length } amenities selected </p>
       <div className="max-h-52 overflow-y-auto mt-2 border border-neutral-400 rounded p-2">
         {amenities.filter((amenity) =>
           amenity.amenity.toLowerCase().includes(searchQuery.toLowerCase())

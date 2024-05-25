@@ -5,10 +5,7 @@ import Navbar from '@/components/Navbar'
 import BarChart from '@/components/BarChart'
 import AmenityCart from '@/components/AmenityCart'
 import Toggle from '@/components/Toggle'
-import { useLeafletContext } from '@react-leaflet/core'
-import { useMap } from 'react-leaflet'
-import L from 'leaflet'
-import { useEffect } from 'react'
+import Metrics from '@/components/Metrics'
 import Searchbar from '@/components/Searchbar'
 import Image from 'next/image'
 import amenitiesData from '../../../data/AmenityData'
@@ -123,9 +120,10 @@ export default function MyPage() {
       <Navbar/>
       <div className="flex h-full">
         <div className="basis-1/5 px-4 pb-16 overflow-y-scroll h-[100%]">
-          <form action="" method="" onSubmit={handleSubmit} className="" encType="multipart/form-data">
+          <h1 className="mt-2 text-md font-bold">Configure inputs</h1>
+          <form action="" method="" onSubmit={handleSubmit} encType="multipart/form-data" className="grid grid-cols-1 gap-4">
             <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates}></Searchbar>
-            <div className="flex mb-4 space-x-6">
+            <div className="flex space-x-6">
               <div>
                 <label className="font-semibold text-sm">No. of bedrooms</label>
                 <input type="number" name="bedroom-count" id="bedroom-count" value={bedrooms} onChange={event => setBedrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="1"></input>
@@ -135,7 +133,7 @@ export default function MyPage() {
                 <input type="number" name="bathroom-count" id="bathroom-count" value={bathrooms} onChange={event => setBathrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="1"></input>
               </div>
             </div>
-            <div className="flex mb-4 space-x-6">
+            <div className="flex space-x-6">
               <div>
                 <label className="font-semibold text-sm">Lot size (m<sup>2</sup>)</label>
                 <input type="number" name="lot-size" id="lot-size" value={lotSize} onChange={event => setLotSize(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
@@ -145,7 +143,7 @@ export default function MyPage() {
                 <input type="number" name="floor-size" id="floor-size" value={floorArea} onChange={event => setFloorArea(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
               </div>
             </div>
-            <div className="flex mb-4 space-x-6">
+            <div className="flex space-x-6">
               <div>
                 <label className="font-semibold text-sm">Age (yr)</label>
                 <input type="number" value={age} onChange={event => setAge(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
@@ -161,7 +159,7 @@ export default function MyPage() {
             </div>
             {/* radio options */}
             <div className="grid grid-cols-2 gap-y-3 my-4">
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-1">
                 <p className="font-semibold text-sm justify-around">Operation</p>
                 <div className="flex items-center gap-x-1">
                   <input type="radio" name="operation"/>
@@ -172,7 +170,7 @@ export default function MyPage() {
                   <label className="text-sm">Rent</label>
                 </div>
               </div>
-              <div className="flex flex-col justify-around">
+              <div className="flex flex-col gap-1">
                 <p className="font-semibold text-sm">Sale type</p>
                 <div className="flex items-center gap-x-1">
                   <input type="radio" name="saleType"/>
@@ -183,7 +181,7 @@ export default function MyPage() {
                   <label className="text-sm">Resale</label>
                 </div>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-1">
                 <p className="font-semibold text-sm justify-around">Furnishing</p>
                 <div className="flex items-center gap-x-1">
                   <input type="radio" name="furnishing"/>
@@ -233,15 +231,18 @@ export default function MyPage() {
               <button type="submit" className="focus:outline-none text-white bg-sky-500 hover:bg-sky-600 focus:ring-2 focus:ring-sky-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
             </div>
           </form>
-          <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
-          <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
         </div>
-        <div className="flex-1 relative">
-          <div className="basis-3/5">
+        <div className="flex-1 relative basis-3/5">
+          <div>
             <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
           </div>
         </div>
-        <div className="basis-1/5">
+        <div className="basis-1/5 px-4">
+          <h1>Options</h1>
+          <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
+          <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
+          <h1>Results</h1>
+          <Metrics/>
           <BarChart/>
         </div>
       </div>
