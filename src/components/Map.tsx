@@ -107,7 +107,7 @@ const Legend = ({map, floodChecked}) => {
 
 // once a marker has been created by clicking onto the map, it should update the latlng state
 // address search bar should contain the latlng of the newly created marker
-const LocationMarker = ({searchedCoords, setCoords, setSearchQuery}) => {
+const LocationMarker = ({searchedCoords, setCoords, setSearchQuery, resetSearchResult }) => {
   const map = useMapEvents({
     click(e) {
       // update coordinate position and search query from main page
@@ -117,6 +117,7 @@ const LocationMarker = ({searchedCoords, setCoords, setSearchQuery}) => {
       })
       setSearchQuery(`${e.latlng.lat}, ${e.latlng.lng}`)
       map.flyTo(e.latlng, map.getZoom())
+	  resetSearchResult();
       // console.log(e.latlng.lat)
     }
   })
@@ -129,7 +130,7 @@ const LocationMarker = ({searchedCoords, setCoords, setSearchQuery}) => {
 }
 
 
-const Map = ({coords, setCoords, setSearchQuery, floodChecked, earthquakeChecked}) => {
+const Map = ({coords, setCoords, setSearchQuery, floodChecked, earthquakeChecked, resetSearchResult}) => {
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
@@ -144,7 +145,7 @@ const Map = ({coords, setCoords, setSearchQuery, floodChecked, earthquakeChecked
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <LocationMarker searchedCoords={coords} setCoords={setCoords} setSearchQuery={setSearchQuery}/>
+      <LocationMarker searchedCoords={coords} setCoords={setCoords} setSearchQuery={setSearchQuery} resetSearchResult={resetSearchResult}/>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
       <FloodLayer floodChecked={floodChecked}></FloodLayer>
       <FaultlineLayer earthquakeChecked={earthquakeChecked}></FaultlineLayer>
