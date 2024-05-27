@@ -148,7 +148,7 @@ export default function MyPage() {
       <Navbar/>
       <div className="flex h-full">
         <div className="basis-1/5 px-4 pb-16 overflow-y-scroll h-[100%]">
-          <h1 className="mt-2 text-md font-bold">Configure inputs</h1>
+          <h1 className="mt-2 text-md font-bold">Estimate for new property</h1>
           <form action="" method="" onSubmit={handleSubmit} encType="multipart/form-data" className="grid grid-cols-1 gap-4">
             <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates}></Searchbar>
             <div className="flex space-x-6">
@@ -188,7 +188,7 @@ export default function MyPage() {
             {/* radio options */}
             <div className="grid grid-cols-2 gap-y-3 my-4">
               <div className="flex flex-col gap-1">
-                <p className="font-semibold text-sm justify-around">Operation</p>
+                <p className="font-semibold text-sm justify-around">Purchase type</p>
                 <div className="flex items-center gap-x-1">
                   <input type="radio" name="operation" checked={operation === 'buy'} onChange={() => setOperation('buy')} />
                   <label className="text-sm">Buy</label>
@@ -247,7 +247,7 @@ export default function MyPage() {
                           <Image src="/upload.svg" width={40} height={40} alt="upload"></Image>
                         </div>
                         <p>{imageName}</p>
-                        <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload the property image</span></p>
                         <p className="text-xs text-gray-500">PNG or JPG (MAX SIZE 5MB)</p>
                     </div>
                     <input id="dropzone-file" type="file" accept="image/*" className="hidden" onChange={event => uploadImage(event)} />
@@ -262,7 +262,7 @@ export default function MyPage() {
         </div>
         <div className="flex-1 relative basis-3/5">
           <div>
-            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked}/>
+            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked} resetSearchResult={resetSearchResult}/>
           </div>
         </div>
         <div className="basis-1/5 px-4">
