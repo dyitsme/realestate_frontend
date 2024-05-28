@@ -1,29 +1,29 @@
-import { CategoryScale, Chart } from 'chart.js/auto'
-import { Bar } from 'react-chartjs-2'
+import { CategoryScale, Chart } from 'chart.js/auto';
+import { Bar } from 'react-chartjs-2';
 
-Chart.register(CategoryScale)
+Chart.register(CategoryScale);
 
 export const options = {
   indexAxis: 'y' as const,
   elements: {
     bar: {
       borderWidth: 0,
-	  backgroundColor: (context) => {
-				const chart = context.chart;
-				const { ctx, chartArea } = chart;
-				if(!chartArea) {
-					return null
-				}
-				return getGradientBackground(chart);
-			},
-		borderColor: (context) => {
-				const chart = context.chart;
-				const { ctx, chartArea } = chart;
-				if(!chartArea) {
-					return null
-				}
-				return getGradientBorder(chart);
-			},	
+      backgroundColor: (context) => {
+        const { chart, dataset, dataIndex } = context;
+        const { ctx, chartArea } = chart;
+        if (!chartArea) {
+          return null; // Prevent access if chartArea is not available
+        }
+        return getGradientBackground(ctx, chartArea, dataset.data[dataIndex]);
+      },
+      borderColor: (context) => {
+        const { chart, dataset, dataIndex } = context;
+        const { ctx, chartArea } = chart;
+        if (!chartArea) {
+          return null; // Prevent access if chartArea is not available
+        }
+        return getGradientBorder(ctx, chartArea, dataset.data[dataIndex]);
+      },
     },
   },
   responsive: true,
@@ -37,95 +37,70 @@ export const options = {
     },
   },
   scales: {
-      y: {
-        ticks: {
-          font: {
-            size: 7,
-          }
-        }
+    y: {
+      ticks: {
+        font: {
+          size: 5.5,
+        },
       },
-      x: {
-        ticks: {
-          font: {
-            size: 8
-          }
-        }
-      }
-    }
-}
+    },
+    x: {
+      ticks: {
+        font: {
+          size: 8,
+        },
+      },
+    },
+  },
+};
 
-const BarChart = () => {
-    return (
+const BarChart = ({ chartData, chartLabels, label }) => {
+  return (
     <div>
       <Bar
         options={options}
         data={{
-          labels: ['Bedrooms', 'Floor size', 'Total Rooms','Age', 'Religion', 'Transportation'],
+          labels: chartLabels,
           datasets: [
             {
-              label: 'Revenue', 
-              data: [0.95, 0.798,  0.792,-0.4, -0.39, -0.31]
-            }
+              label: label,
+              data: chartData,
+            },
+          ],
+        }}
+      />
+    </div>
+  );
+};
 
-          ]
-        }}
-      >
-      </Bar>
-    </div>
-  )
-}
-/*
-const BarChart = () => {
-    return (
-    <div>
-      <Bar
-        options={options}
-        data={{
-          labels: ['Bedrooms', 'Floor size', 'Total Rooms','Age', 'Religion', 'Transportation'],
-          datasets: [
-            {
-              label: 'Revenue', 
-              data: [0.95, 0.798,  0.792,-0.4, -0.39, -0.31]
-            }
-			backgroundColor: (context) => {
-				const chart = context.chart;
-				const { ctx, chartArea } = chart;
-				if(!chartArea) {
-					return null
-				}
-				return getGradient(chart);
-			}
-          ]
-        }}
-      >
-      </Bar>
-    </div>
-  )
-}
-*/
-function getGradientBackground(chart)
-{
-	const {ctx, chartArea: {top, bottom, left, right}, scales: {x, y} } = chart;
-	const gradientSegment = ctx.createLinearGradient(0 ,bottom, 0, top);
-	
-	gradientSegment.addColorStop(0, '#F87171');
-	gradientSegment.addColorStop(0.5, '#F87171');
-	gradientSegment.addColorStop(0.5, '#4ADE80');
-	gradientSegment.addColorStop(1, '#4ADE80');
-	return gradientSegment;
-	
+function getGradientBackground(ctx, chartArea, value) {
+  const { top, bottom } = chartArea;
+  const gradient = ctx.createLinearGradient(0, bottom, 0, top);
+
+  if (value >= 0) {
+    gradient.addColorStop(0, '#4ADE80'); // Green
+    gradient.addColorStop(1, '#4ADE80');
+  } else {
+    gradient.addColorStop(0, '#F87171'); // Red
+    gradient.addColorStop(1, '#F87171');
+  }
+
+  return gradient;
 }
 
-function getGradientBorder(chart)
-{
-	const {ctx, chartArea: {top, bottom, left, right}, scales: {x, y} } = chart;
-	const gradientSegment = ctx.createLinearGradient(0 ,bottom, 0, top);
-	
-	gradientSegment.addColorStop(0, '#FECACA');
-	gradientSegment.addColorStop(0.5, '#FECACA');
-	gradientSegment.addColorStop(0.5, '#BBF7D0');
-	gradientSegment.addColorStop(1, '#BBF7D0');
-	return gradientSegment;
-	
+function getGradientBorder(ctx, chartArea, value) {
+  const { top, bottom } = chartArea;
+  const gradient = ctx.createLinearGradient(0, bottom, 0, top);
+
+  if (value >= 0) {
+    gradient.addColorStop(0, '#BBF7D0'); // Light Green
+    gradient.addColorStop(1, '#BBF7D0');
+  } else {
+    gradient.addColorStop(0, '#FECACA'); // Light Red
+    gradient.addColorStop(1, '#FECACA');
+  }
+
+  return gradient;
 }
-export default BarChart
+
+export default BarChart;

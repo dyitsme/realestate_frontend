@@ -55,6 +55,15 @@ export default function MyPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchData, setSearchData] = useState([])
 
+  //chart data
+  const chartDataFeature = [0.31, 0.39, 0.4, 0.792, 0.798, 0.95];
+  const chartLabelsFeature = ['text', 'text', 'text', 'text', 'text', 'text'];
+  const labelFeature = 'Feature Importance';
+
+  const chartDataPrice = [-0.95, -0.798, -0.692, -0.4, -0.39, -0.21];
+  const chartLabelsPrice = ['text', 'text', 'text', 'text', 'text', 'text'];
+  const labelPrice = 'Price Factors';
+
   const handleAddressChange = (e: any) => {
     setAddress(e.target.value);
   }
@@ -271,7 +280,8 @@ export default function MyPage() {
           <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
           <h1>Results</h1>
           <Metrics/>
-          <BarChart/>
+          <BarChart chartData={chartDataFeature} chartLabels={chartLabelsFeature} label={labelFeature} />
+          <BarChart chartData={chartDataPrice} chartLabels={chartLabelsPrice} label={labelPrice} />
         </div>
       </div>
     </div>
