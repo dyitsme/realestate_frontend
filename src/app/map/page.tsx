@@ -60,7 +60,7 @@ export default function MyPage() {
   const chartLabelsFeature = ['text', 'text', 'text', 'text', 'text', 'text'];
   const labelFeature = 'Feature Importance';
 
-  const chartDataPrice = [-0.95, -0.798, -0.692, -0.4, -0.39, -0.21];
+  const chartDataPrice = [0.95, 0.798, 0.692, -0.5, -0.8, -0.89];
   const chartLabelsPrice = ['text', 'text', 'text', 'text', 'text', 'text'];
   const labelPrice = 'Price Factors';
 
