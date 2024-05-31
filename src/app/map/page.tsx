@@ -126,8 +126,6 @@ export default function MyPage() {
     setAmenities(amenitiesArray)
     setSearchQuery('')
     setSearchData([])
-    setFloodChecked(false)
-    setEarthquakeChecked(false)
   }
 
   return (
