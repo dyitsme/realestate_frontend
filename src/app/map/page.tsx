@@ -4,7 +4,6 @@ import { useMemo, useRef, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import BarChart from '@/components/BarChart'
 import AmenityCart from '@/components/AmenityCart'
-import Toggle from '@/components/Toggle'
 import Metrics from '@/components/Metrics'
 import Searchbar from '@/components/Searchbar'
 import Image from 'next/image'
@@ -14,7 +13,7 @@ export default function MyPage() {
   const Map = useMemo(() => dynamic(
     () => import('@/components/Map'),
     { 
-      loading: () => <p>A map is loading</p>,
+      loading: () => <p>Loading map...</p>,
       ssr: false
     }
   ), [])
@@ -59,18 +58,6 @@ export default function MyPage() {
     setAddress(e.target.value);
   }
   
-  // floods and earthquake states and functions
-  const [floodChecked, setFloodChecked] = useState(false)
-  const [earthquakeChecked, setEarthquakeChecked] = useState(false)
-
-  function handleFloodChange() {
-    setFloodChecked(!floodChecked)
-  }
-
-  function handleEarthquakeChange() {
-    setEarthquakeChecked(!earthquakeChecked)
-  }
-
   function uploadImage(e: any) {
     setImage(e.target.files[0])
     setImageName(e.target.files[0].name)
@@ -247,7 +234,7 @@ export default function MyPage() {
                           <Image src="/upload.svg" width={40} height={40} alt="upload"></Image>
                         </div>
                         <p>{imageName}</p>
-                        <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload the property image</span></p>
+                        <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload a property image</span></p>
                         <p className="text-xs text-gray-500">PNG or JPG (MAX SIZE 5MB)</p>
                     </div>
                     <input id="dropzone-file" type="file" accept="image/*" className="hidden" onChange={event => uploadImage(event)} />
@@ -262,14 +249,11 @@ export default function MyPage() {
         </div>
         <div className="flex-1 relative basis-3/5">
           <div>
-            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked} resetSearchResult={resetSearchResult}/>
+            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} resetSearchResult={resetSearchResult}/>
           </div>
         </div>
-        <div className="basis-1/5 px-4">
-          <h1>Options</h1>
-          <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
-          <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
-          <h1>Results</h1>
+        <div className="flex flex-col basis-1/5 px-4 gap-4">
+          <h1 className="mt-2 text-md font-bold">Results</h1>
           <Metrics/>
           <BarChart/>
         </div>
