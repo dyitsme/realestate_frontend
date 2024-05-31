@@ -1,11 +1,4 @@
 const amenitiesData = [
-  "Broadband Internet Available",
-  "Air Conditioning",
-  "Car Spaces",
-  "Area Address",
-  "Built-in Wardrobes",
-  "Balcony",
-  "Fully Fenced",
   "Gym",
   "Wi-Fi",
   "Swimming Pool",
@@ -25,7 +18,7 @@ const amenitiesData = [
   "Reception Area",
   "Fire Alarm",
   "Fire Sprinkler System",
-  "24-hour Security",
+  "24-Hour Security",
   "Garden",
   "Secure Parking",
   "Bar",
@@ -39,7 +32,7 @@ const amenitiesData = [
   "Fitness Center",
   "Game Room",
   "Meeting Rooms",
-  "Multi-purpose Hall",
+  "Multi-Purpose Hall",
   "Shower Rooms",
   "Sky Lounge",
   "Smoke Detector",
@@ -55,7 +48,7 @@ const amenitiesData = [
   "Deck",
   "Gazebo",
   "Landscaped Garden",
-  "Multi-purpose Lawn",
+  "Multi-Purpose Lawn",
   "Parking Lot",
   "Theater",
   "Daycare Center",
@@ -73,7 +66,7 @@ const amenitiesData = [
   "Indoor Pool",
   "Drying Area",
   "Floorboards",
-  "Split-system Heating",
+  "Split-System Heating",
   "Garage",
   "Remote Garage",
   "Sports Facilities",
@@ -101,7 +94,6 @@ const amenitiesData = [
   "Lanai",
   "Ducted Cooling",
   "Ducted Vacuum System",
-  "Fireplace",
-  "Volleyball Court"
+  "Fireplace"
 ];
 export default amenitiesData

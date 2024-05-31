@@ -1,9 +1,10 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON, useMapEvents, LayersControl } from 'react-leaflet'
 import { useLeafletContext } from '@react-leaflet/core'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useState, useEffect, useRef } from 'react'
-import floodData from '../../data/MetroManila5yrFlood.json'
+import MetroManila5yrFloodData from '../../data/MetroManila5yrFlood.json'
+import MetroManila25yrFloodData from '../../data/MetroManila25yrFlood.json'
 import faultlineData from '../../data/MetroManilaFaultline.json'
 
 
@@ -47,21 +48,16 @@ const faultlineStyle = {
   weight: 7
 }
 
-const FloodLayer = ({floodChecked}) => {
-  if (floodChecked) {
-    return (
-      <GeoJSON data={floodData} style={floodStyle}></GeoJSON>
-    )
-  }
-    console.log('flood is toggled on')
+const FloodLayer = ({data}) => {
+  return (
+    <GeoJSON data={data} style={floodStyle}></GeoJSON>
+  )
 }
 
-const FaultlineLayer = ({earthquakeChecked}) => {
-  if (earthquakeChecked) {
-    return (
-      <GeoJSON data={faultlineData} style={faultlineStyle}></GeoJSON>
-    )
-  }
+const FaultlineLayer = () => {
+  return (
+    <GeoJSON data={faultlineData} style={faultlineStyle}></GeoJSON>
+  )
 }
 
 
@@ -77,17 +73,17 @@ function getColor(hazard) {
   }
 }
 
-const Legend = ({map, floodChecked}) => {
+
+const FloodInfoLegend = ({map}) => {
   useEffect(() => {
     if (map) {
-      const legend = L.control({ position: "topright" })
-
+      const legend = L.control({ position: 'bottomleft' })
       legend.onAdd = () => {
         let div = L.DomUtil.create('div', 'info legend')
         let grades = ['Low', 'Medium', 'High']
         let labels = []
 
-        div.innerHTML += '<h4>Flood risk</h4>'
+        div.innerHTML += '<h4>Flood Hazard</h4>'
         for (let i = 0; i < grades.length; i++) {
           div.innerHTML +=
               `<div class="flex-container">
@@ -159,9 +155,18 @@ const Map = ({coords, setCoords, setSearchQuery, floodChecked, earthquakeChecked
       />
       <LocationMarker searchedCoords={coords} setCoords={setCoords} setSearchQuery={setSearchQuery} resetSearchResult={resetSearchResult}/>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
-      <FloodLayer floodChecked={floodChecked}></FloodLayer>
-      <FaultlineLayer earthquakeChecked={earthquakeChecked}></FaultlineLayer>
-      <Legend map={map} floodChecked={floodChecked}/>
+      <LayersControl position="bottomright">
+        <LayersControl.Overlay name="5-year Floods">
+          <FloodLayer data={MetroManila5yrFloodData}></FloodLayer>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name="25-year Floods">
+          <FloodLayer data={MetroManila25yrFloodData}></FloodLayer>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name="Faultlines">
+          <FaultlineLayer></FaultlineLayer>
+        </LayersControl.Overlay>
+      </LayersControl>
+      <FloodInfoLegend map={map} />
     </MapContainer>
   )
 }

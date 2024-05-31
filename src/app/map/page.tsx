@@ -14,7 +14,7 @@ export default function MyPage() {
   const Map = useMemo(() => dynamic(
     () => import('@/components/Map'),
     { 
-      loading: () => <p>A map is loading</p>,
+      loading: () => <p>Loading map...</p>,
       ssr: false
     }
   ), [])
@@ -247,7 +247,7 @@ export default function MyPage() {
                           <Image src="/upload.svg" width={40} height={40} alt="upload"></Image>
                         </div>
                         <p>{imageName}</p>
-                        <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload the property image</span></p>
+                        <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload a property image</span></p>
                         <p className="text-xs text-gray-500">PNG or JPG (MAX SIZE 5MB)</p>
                     </div>
                     <input id="dropzone-file" type="file" accept="image/*" className="hidden" onChange={event => uploadImage(event)} />
@@ -265,11 +265,11 @@ export default function MyPage() {
             <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked} resetSearchResult={resetSearchResult}/>
           </div>
         </div>
-        <div className="basis-1/5 px-4">
-          <h1>Options</h1>
+        <div className="flex flex-col basis-1/5 px-4 gap-4">
+          {/* <h1>Options</h1>
           <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
-          <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/>
-          <h1>Results</h1>
+          <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/> */}
+          <h1 className="mt-2 text-md font-bold">Results</h1>
           <Metrics/>
           <BarChart/>
         </div>
