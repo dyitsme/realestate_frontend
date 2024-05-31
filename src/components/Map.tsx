@@ -126,7 +126,7 @@ const LocationMarker = ({searchedCoords, setCoords, setSearchQuery, resetSearchR
 }
 
 
-const Map = ({coords, setCoords, setSearchQuery, floodChecked, earthquakeChecked, resetSearchResult}) => {
+const Map = ({coords, setCoords, setSearchQuery, resetSearchResult}) => {
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {

@@ -4,7 +4,6 @@ import { useMemo, useRef, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import BarChart from '@/components/BarChart'
 import AmenityCart from '@/components/AmenityCart'
-import Toggle from '@/components/Toggle'
 import Metrics from '@/components/Metrics'
 import Searchbar from '@/components/Searchbar'
 import Image from 'next/image'
@@ -59,18 +58,6 @@ export default function MyPage() {
     setAddress(e.target.value);
   }
   
-  // floods and earthquake states and functions
-  const [floodChecked, setFloodChecked] = useState(false)
-  const [earthquakeChecked, setEarthquakeChecked] = useState(false)
-
-  function handleFloodChange() {
-    setFloodChecked(!floodChecked)
-  }
-
-  function handleEarthquakeChange() {
-    setEarthquakeChecked(!earthquakeChecked)
-  }
-
   function uploadImage(e: any) {
     setImage(e.target.files[0])
     setImageName(e.target.files[0].name)
@@ -262,13 +249,10 @@ export default function MyPage() {
         </div>
         <div className="flex-1 relative basis-3/5">
           <div>
-            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} floodChecked={floodChecked} earthquakeChecked={earthquakeChecked} resetSearchResult={resetSearchResult}/>
+            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} resetSearchResult={resetSearchResult}/>
           </div>
         </div>
         <div className="flex flex-col basis-1/5 px-4 gap-4">
-          {/* <h1>Options</h1>
-          <Toggle label="Floods" value={floodChecked} onChange={handleFloodChange}/>
-          <Toggle label="Faultlines" value={earthquakeChecked} onChange={handleEarthquakeChange}/> */}
           <h1 className="mt-2 text-md font-bold">Results</h1>
           <Metrics/>
           <BarChart/>
