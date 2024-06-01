@@ -25,6 +25,8 @@ export default function MyPage() {
     lng: 121.0223
   })
 
+  const [city, setCity] = useState('')
+
   const [bedrooms, setBedrooms] = useState('')
   const [bathrooms, setBathrooms] = useState('')
   const [lotSize, setLotSize] = useState('')
@@ -75,6 +77,7 @@ export default function MyPage() {
     }
 
     data.append('coords', JSON.stringify(coordinates))
+    data.append('city', city)
     data.append('bedrooms', bedrooms)
     data.append('bathrooms', bathrooms)
     data.append('lotSize', lotSize)
@@ -108,6 +111,7 @@ export default function MyPage() {
 
   function resetForm() {
     setAddress('')
+    setCity('')
     setCoordinates({ lat: 14.6091, lng: 121.0223 })
     setBedrooms('')
     setBathrooms('')
@@ -135,7 +139,7 @@ export default function MyPage() {
         <div className="basis-1/5 px-4 pb-16 overflow-y-scroll h-[100%]">
           <h1 className="mt-2 text-md font-bold">Estimate for new property</h1>
           <form action="" method="" onSubmit={handleSubmit} encType="multipart/form-data" className="grid grid-cols-1 gap-4">
-            <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates}></Searchbar>
+            <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates} setCity={setCity}></Searchbar>
             <div className="flex space-x-6">
               <div>
                 <label className="font-semibold text-sm">No. of bedrooms</label>
@@ -247,7 +251,7 @@ export default function MyPage() {
         </div>
         <div className="flex-1 relative basis-3/5">
           <div>
-            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} resetSearchResult={resetSearchResult}/>
+            <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} setCity={setCity} resetSearchResult={resetSearchResult}/>
           </div>
         </div>
         <div className="flex flex-col basis-1/5 px-4 gap-4">
