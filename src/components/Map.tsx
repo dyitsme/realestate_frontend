@@ -1,5 +1,4 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON, useMapEvents, LayersControl } from 'react-leaflet'
-import { useLeafletContext } from '@react-leaflet/core'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useState, useEffect, useRef } from 'react'
@@ -54,9 +53,9 @@ const FloodLayer = ({data}) => {
   )
 }
 
-const FaultlineLayer = () => {
+const FaultlineLayer = ({data}) => {
   return (
-    <GeoJSON data={faultlineData} style={faultlineStyle}></GeoJSON>
+    <GeoJSON data={data} style={faultlineStyle}></GeoJSON>
   )
 }
 
@@ -163,7 +162,7 @@ const Map = ({coords, setCoords, setSearchQuery, resetSearchResult}) => {
           <FloodLayer data={MetroManila25yrFloodData}></FloodLayer>
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Faultlines">
-          <FaultlineLayer></FaultlineLayer>
+          <FaultlineLayer data={faultlineData}></FaultlineLayer>
         </LayersControl.Overlay>
       </LayersControl>
       <FloodInfoLegend map={map} />
