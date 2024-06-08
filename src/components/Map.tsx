@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON, useMapEvents, LayersControl } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import L from 'leaflet'
+import  L from 'leaflet'
 import { useState, useEffect, useRef } from 'react'
 import MetroManila5yrFloodData from '../../data/MetroManila5yrFlood.json'
 import MetroManila25yrFloodData from '../../data/MetroManila25yrFlood.json'
@@ -76,7 +76,7 @@ function getColor(hazard) {
 const FloodInfoLegend = ({map}) => {
   useEffect(() => {
     if (map) {
-      const legend = L.control({ position: 'bottomleft' })
+      const legend = new L.Control({ position: 'bottomleft' })
       legend.onAdd = () => {
         let div = L.DomUtil.create('div', 'info legend')
         let grades = ['Low', 'Medium', 'High']
