@@ -71,7 +71,7 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
     }
     queryTimeout.current = setTimeout(async () => {
       if (searchValue !== '') {
-        const url = `http://localhost:3000/api/search/${searchValue}`;
+        const url = `/api/search/${searchValue}`;
         const response = await fetch(url);
         const json = await response.json();
         console.log(url);
