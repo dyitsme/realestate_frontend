@@ -4,7 +4,7 @@ export default function About() {
   return (
     <div className="">
       <Navbar/>
-        <div className="max-h-screen mx-auto px-96 py-8 overflow-scroll">
+        <div className="max-h-screen mx-auto px-8 sm:px-48 lg:px-72 py-8 overflow-scroll">
           <h1 className="text-3xl font-semibold mb-4">Welcome to the Property Price Predictor</h1>
           <p className="text-gray-600 mb-6">
             This site provides a rough estimate for a given property price.
@@ -31,7 +31,7 @@ export default function About() {
             After providing these details, the site will generate a rough estimate of the property price.
             Keep in mind that these predictions are not expected to be completely accurate with the actual value of the property.
           </p>
-          <div className="mt-8">
+          <div className="my-10">
             <h2 className="text-xl font-semibold mb-2">Authors</h2>
             <ul className="list-disc pl-6">
               <li>Sean Iverson Caoile</li>
