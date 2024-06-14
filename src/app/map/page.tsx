@@ -41,6 +41,22 @@ export default function MyPage() {
   const [image, setImage] = useState('')
   const [imageName, setImageName] = useState('')
 
+  // validation errors
+  const [errors, setErrors] = useState({
+    bedrooms: false,
+    bathrooms: false,
+    lotSize: false,
+    floorArea: false,
+    age: false,
+    totalFloors: false,
+    carSpaces: false,
+    operation: false,
+    saleType: false,
+    furnishing: false,
+    propertyType: false,
+    image: false
+  })
+
   // amenities
   const [amenitySearchQuery, setAmenitySearchQuery] = useState('')
   const amenitiesArray = amenitiesData.map(amenity => ({
@@ -74,10 +90,28 @@ export default function MyPage() {
 
   async function handleSubmit(e: any) {
     e.preventDefault()
+    const validationErrors = {
+      bedrooms: !bedrooms,
+      bathrooms: !bathrooms,
+      lotSize: !lotSize,
+      floorArea: !floorArea,
+      age: !age,
+      totalFloors: !totalFloors,
+      carSpaces: !carSpaces,
+      operation: !operation,
+      saleType: !saleType,
+      furnishing: !furnishing,
+      propertyType: !propertyType,
+      image: !image
+    }
+    setErrors(validationErrors)
+
+    const hasErrors = Object.values(validationErrors).some(error => error)
+    if (hasErrors) return
+
     const data = new FormData()
     const selectedAmenities = []
     for (let i = 0; i < amenities.length; i++) {
-      // console.log(amenities[i].isSelected)
       if (amenities[i].isSelected === true) {
         selectedAmenities.push(amenities[i])
       }
@@ -106,7 +140,7 @@ export default function MyPage() {
       }
     }
     catch(err) {
-
+      console.error(err)
     }
 
   }
@@ -135,6 +169,20 @@ export default function MyPage() {
     setAmenities(amenitiesArray)
     setSearchQuery('')
     setSearchData([])
+    setErrors({
+      bedrooms: false,
+      bathrooms: false,
+      lotSize: false,
+      floorArea: false,
+      age: false,
+      totalFloors: false,
+      carSpaces: false,
+      operation: false,
+      saleType: false,
+      furnishing: false,
+      propertyType: false,
+      image: false
+    })
   }
 
   return (
@@ -149,35 +197,42 @@ export default function MyPage() {
               <div>
                 <label className="font-semibold text-sm">No. of bedrooms</label>
                 <input type="number" name="bedroom-count" id="bedroom-count" value={bedrooms} onChange={event => setBedrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="1"></input>
+                {errors.bedrooms && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
               <div>
                 <label className="font-semibold text-sm">No. of bathrooms</label>
                 <input type="number" name="bathroom-count" id="bathroom-count" value={bathrooms} onChange={event => setBathrooms(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="1"></input>
+                {errors.bathrooms && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
             </div>
             <div className="flex space-x-6">
               <div>
                 <label className="font-semibold text-sm">Lot size (m<sup>2</sup>)</label>
                 <input type="number" name="lot-size" id="lot-size" value={lotSize} onChange={event => setLotSize(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
+                {errors.lotSize && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
               <div>
                 <label className="font-semibold text-sm">Floor size (m<sup>2</sup>)</label>
                 <input type="number" name="floor-size" id="floor-size" value={floorArea} onChange={event => setFloorArea(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0" step=".01"></input>
+                {errors.floorArea && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
             </div>
             <div className="flex space-x-6">
               <div>
                 <label className="font-semibold text-sm">Age (yr)</label>
                 <input type="number" value={age} onChange={event => setAge(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+                {errors.age && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
               <div>
                 <label className="font-semibold text-sm">No. of floors</label>
                 <input type="number" value={totalFloors} onChange={event => setTotalFloors(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+                {errors.totalFloors && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
             </div>
             <div>
               <label className="font-semibold text-sm">No. of car spaces</label>
               <input type="number" value={carSpaces} onChange={event => setCarSpaces(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 w-28 mt-1 text-sm" min="0"></input>
+              {errors.carSpaces && <p className="text-red-500 text-xs">This field is required.</p>}
             </div>
             {/* radio options */}
             <div className="grid grid-cols-2 gap-y-3 my-4">
@@ -191,6 +246,7 @@ export default function MyPage() {
                   <input type="radio" name="operation" checked={operation === 'rent'} onChange={() => setOperation('rent')} />
                   <label className="text-sm">Rent</label>
                 </div>
+                {errors.operation && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
               <div className="flex flex-col gap-1">
                 <p className="font-semibold text-sm">Sale type</p>
@@ -202,6 +258,7 @@ export default function MyPage() {
                   <input type="radio" name="saleType" checked={saleType === 'resale'} onChange={() => setSaleType('resale')} />
                   <label className="text-sm">Resale</label>
                 </div>
+                {errors.saleType && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
               <div className="flex flex-col gap-1">
                 <p className="font-semibold text-sm justify-around">Furnishing</p>
@@ -217,16 +274,19 @@ export default function MyPage() {
                   <input type="radio" name="furnishing" checked={furnishing === 'furnished'} onChange={() => setFurnishing('furnished')} />
                   <label className="text-sm">Furnished</label>
                 </div>
+                {errors.furnishing && <p className="text-red-500 text-xs">This field is required.</p>}
               </div>
             </div>
             <div className="flex flex-col">
               <label className="font-semibold text-sm">Property type</label>
               <select name="propertyType" value={propertyType} onChange={event => setPropertyType(event.target.value)} className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded p-1.5 mt-1 text-sm">
+                <option value="">Select</option>
                 <option value="house">House</option>
                 <option value="apartment">Apartment</option>
                 <option value="condominium">Condominium</option>
                 <option value="land">Land</option>
               </select>
+              {errors.propertyType && <p className="text-red-500 text-xs">This field is required.</p>}
             </div>
             <div className="mb-4">
               {/* multiselect */}
@@ -247,6 +307,7 @@ export default function MyPage() {
                     <input id="dropzone-file" type="file" accept="image/*" className="hidden" onChange={event => uploadImage(event)} />
                 </label>
               </div> 
+              {errors.image && <p className="text-red-500 text-xs">This field is required.</p>}
             </div>
             <div className="flex">
               <button type="button" onClick={resetForm} className="text-white bg-neutral-400 hover:bg-neutral-500 focus:ring-2 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Reset</button>
