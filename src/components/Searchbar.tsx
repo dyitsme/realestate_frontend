@@ -11,7 +11,7 @@ const Address = ({ street, city, country }) => {
   );
 };
 
-const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, setCoordinates }) => {
+const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, setCoordinates, error }) => {
   let searchValue;
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -102,6 +102,7 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
           className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-700 rounded w-full p-1.5 mt-1 text-sm"
           placeholder="Search..."
         />
+        {error && <p className="text-red-500 text-xs">This field is required.</p>}
         {isDropdownVisible && searchData.length > 0 && (
           <div className="z-10 absolute mt-2 w-full bg-white shadow-md rounded-md">
             {searchData.map((result, index) => (
@@ -121,7 +122,7 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
           </div>
         )}
       </div>
-  </div>
+    </div>
   );
 };
 

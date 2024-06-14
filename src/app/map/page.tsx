@@ -43,6 +43,7 @@ export default function MyPage() {
 
   // validation errors
   const [errors, setErrors] = useState({
+    searchQuery: false,
     bedrooms: false,
     bathrooms: false,
     lotSize: false,
@@ -91,6 +92,7 @@ export default function MyPage() {
   async function handleSubmit(e: any) {
     e.preventDefault()
     const validationErrors = {
+      searchQuery: !searchQuery,
       bedrooms: !bedrooms,
       bathrooms: !bathrooms,
       lotSize: !lotSize,
@@ -170,6 +172,7 @@ export default function MyPage() {
     setSearchQuery('')
     setSearchData([])
     setErrors({
+      searchQuery: false,
       bedrooms: false,
       bathrooms: false,
       lotSize: false,
@@ -192,7 +195,14 @@ export default function MyPage() {
         <div className="basis-1/5 px-4 pb-16 overflow-y-scroll h-[100%]">
           <h1 className="mt-2 text-md font-bold">Estimate for new property</h1>
           <form action="" method="" onSubmit={handleSubmit} encType="multipart/form-data" className="grid grid-cols-1 gap-4">
-            <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates}></Searchbar>
+          <Searchbar 
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              searchData={searchData}
+              setSearchData={setSearchData}
+              setCoordinates={setCoordinates}
+              error={errors.searchQuery}
+            />
             <div className="flex space-x-6">
               <div>
                 <label className="font-semibold text-sm">No. of bedrooms</label>
