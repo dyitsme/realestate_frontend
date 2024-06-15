@@ -1,7 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, GeoJSON, useMapEvents, LayersControl } from 'react-leaflet'
-import { useLeafletContext } from '@react-leaflet/core'
 import 'leaflet/dist/leaflet.css'
-import L from 'leaflet'
+import  L from 'leaflet'
 import { useState, useEffect, useRef } from 'react'
 import MetroManila5yrFloodData from '../../data/MetroManila5yrFlood.json'
 import MetroManila25yrFloodData from '../../data/MetroManila25yrFlood.json'
@@ -54,9 +53,9 @@ const FloodLayer = ({data}) => {
   )
 }
 
-const FaultlineLayer = () => {
+const FaultlineLayer = ({data}) => {
   return (
-    <GeoJSON data={faultlineData} style={faultlineStyle}></GeoJSON>
+    <GeoJSON data={data} style={faultlineStyle}></GeoJSON>
   )
 }
 
@@ -77,7 +76,7 @@ function getColor(hazard) {
 const FloodInfoLegend = ({map}) => {
   useEffect(() => {
     if (map) {
-      const legend = L.control({ position: 'bottomleft' })
+      const legend = new L.Control({ position: 'bottomleft' })
       legend.onAdd = () => {
         let div = L.DomUtil.create('div', 'info legend')
         let grades = ['Low', 'Medium', 'High']
@@ -161,14 +160,15 @@ const Map = ({coords, setCoords, setSearchQuery, setCity, resetSearchResult}) =>
         attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
       /> */}
-      {/* <TileLayer
+      <TileLayer
         attribution=' &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-      /> */}
-      <TileLayer
+      />
+      {/* <TileLayer
         attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png "
-      />
+
+      /> */}
       <LocationMarker searchedCoords={coords} setCoords={setCoords} setSearchQuery={setSearchQuery} setCity={setCity} resetSearchResult={resetSearchResult}/>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
       <LayersControl position="bottomright">
@@ -179,7 +179,7 @@ const Map = ({coords, setCoords, setSearchQuery, setCity, resetSearchResult}) =>
           <FloodLayer data={MetroManila25yrFloodData}></FloodLayer>
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Faultlines">
-          <FaultlineLayer></FaultlineLayer>
+          <FaultlineLayer data={faultlineData}></FaultlineLayer>
         </LayersControl.Overlay>
       </LayersControl>
       <FloodInfoLegend map={map} />
