@@ -7,9 +7,7 @@ const Metrics = ({price, safetyScore}) => {
       </div>
       <div className="grid grid-cols-2">
         <label>Safety</label>
-        <p className="text-right">{safetyScore}</p>
-        <label>Nearby amenities</label>
-        <p className="text-right">3.3/5</p>
+        <p className="text-right">{safetyScore}/8</p>
       </div>
     </div>
   )

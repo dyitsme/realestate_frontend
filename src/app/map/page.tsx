@@ -158,7 +158,7 @@ export default function MyPage() {
         const price = JSON.parse(json.prediction)
         const safety = JSON.parse(json.safetyScore)
         setPrice(price)
-        setSafetyScore(safety)
+        setSafetyScore(safety.toFixed(2))
       }
     }
     catch(err) {
@@ -223,6 +223,7 @@ export default function MyPage() {
               setSearchData={setSearchData}
               setCoordinates={setCoordinates}
               error={errors.searchQuery}
+              setCity={setCity}
             />
             <div className="flex space-x-6">
               <div>
