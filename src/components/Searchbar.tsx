@@ -11,7 +11,9 @@ const Address = ({ street, city, country }) => {
   );
 };
 
-const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, setCoordinates, error }) => {
+
+
+const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, setCoordinates, setCity, error }) => {
   let searchValue;
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -56,6 +58,13 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
   function handleSelectedResult(result) {
     setCoordinates({ lat: result.geometry.coordinates[1], lng: result.geometry.coordinates[0] });
     setSearchQuery(formatAddress(result.properties.name, result.properties.street, result.properties.city, result.properties.country));
+    // if the user searches for a city, set the city name
+    if (result.properties.type === 'city') {
+      setCity(result.properties.name)
+    }
+    else {
+      setCity(result.properties.city);
+    }
     clearSearchResults();
     setIsDropdownVisible(false); // Hide dropdown on selection
   }

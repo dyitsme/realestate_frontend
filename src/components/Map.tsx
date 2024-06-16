@@ -100,9 +100,10 @@ const FloodInfoLegend = ({map}) => {
   return null;
 }
 
+
 // once a marker has been created by clicking onto the map, it should update the latlng state
 // address search bar should contain the latlng of the newly created marker
-const LocationMarker = ({searchedCoords, setCoords, setSearchQuery, resetSearchResult }) => {
+const LocationMarker = ({searchedCoords, setCoords, setSearchQuery, setCity, resetSearchResult }) => {
   const map = useMapEvents({
     click(e) {
       // update coordinate position and search query from main page
@@ -111,11 +112,26 @@ const LocationMarker = ({searchedCoords, setCoords, setSearchQuery, resetSearchR
         lng: e.latlng.lng
       })
       setSearchQuery(`${e.latlng.lat}, ${e.latlng.lng}`)
+      // reverse search the coordinates
+      // set the city if possible
+      // const result = reverseSearch(e.latlng.lat, e.latlng.lng)
+      reverseSearchCity(e.latlng.lat, e.latlng.lng)
+      // console.log(result)
+      // setCity(result.properties.city)
       map.flyTo(e.latlng, map.getZoom())
 	  resetSearchResult();
       // console.log(e.latlng.lat)
     }
   })
+
+  function reverseSearchCity(lat, lng) {
+    const url = `/api/reverse/${lat}/${lng}`;
+    fetch(url)
+    .then(response => response.json())
+    .then(json => {
+      setCity(json)
+    })
+  } 
 
   return (
     <Marker position={searchedCoords} icon={icon}>
@@ -125,7 +141,7 @@ const LocationMarker = ({searchedCoords, setCoords, setSearchQuery, resetSearchR
 }
 
 
-const Map = ({coords, setCoords, setSearchQuery, resetSearchResult}) => {
+const Map = ({coords, setCoords, setSearchQuery, setCity, resetSearchResult}) => {
   const [map, setMap] = useState(null)
   useEffect(() => {
     if (map) {
@@ -151,8 +167,9 @@ const Map = ({coords, setCoords, setSearchQuery, resetSearchResult}) => {
       {/* <TileLayer
         attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png "
+
       /> */}
-      <LocationMarker searchedCoords={coords} setCoords={setCoords} setSearchQuery={setSearchQuery} resetSearchResult={resetSearchResult}/>
+      <LocationMarker searchedCoords={coords} setCoords={setCoords} setSearchQuery={setSearchQuery} setCity={setCity} resetSearchResult={resetSearchResult}/>
       <Circle center={[coords.lat, coords.lng]} fillColor="blue" radius={1000}></Circle>
       <LayersControl position="bottomright">
         <LayersControl.Overlay name="5-year Floods">
