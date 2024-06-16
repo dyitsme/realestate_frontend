@@ -38,7 +38,7 @@ export default function MyPage() {
   const [operation, setOperation] = useState('')
   const [saleType, setSaleType] = useState('')
   const [furnishing, setFurnishing] = useState('')
-  const [propertyType, setPropertyType] = useState('')
+  const [propertyType, setPropertyType] = useState('house')
 
   const [image, setImage] = useState('')
   const [imageName, setImageName] = useState('')
@@ -64,6 +64,9 @@ export default function MyPage() {
   const chartDataPrice = [0.95, 0.798, 0.692, -0.5, -0.8, -0.89];
   const chartLabelsPrice = ['text', 'text', 'text', 'text', 'text', 'text'];
   const labelPrice = 'Price Factors';
+
+  const [price, setPrice] = useState(0)
+  const [safetyScore, setSafetyScore] = useState(0)
 
   const handleAddressChange = (e: any) => {
     setAddress(e.target.value);
@@ -92,20 +95,34 @@ export default function MyPage() {
     data.append('lotSize', lotSize)
     data.append('floorArea', floorArea)
     data.append('age', age)
-    data.append('amenities', JSON.stringify(selectedAmenities))
+    data.append('totalFloors', totalFloors)
+    data.append('carSpaces', carSpaces)
+    data.append('operation', operation)
+    data.append('saleType', saleType)
+    data.append('furnishing', furnishing)
+
+    data.append('propertyType', propertyType)
+    // data.append('amenities', JSON.stringify(selectedAmenities))
+    // data.append('amenities', 'gym')
     data.append('image', image)
 
     for (const value of data.values()) {
       console.log(value)
     }
     try {
-      const url = ''
+      // don't forget to update url when deploying
+      const url = 'http://localhost:5000/predict_xgb'
       const response = await fetch(url, {
         method: 'POST',
-        body: data
+        body: data, 
       })
       if (response.ok) {
         // do something
+        const json = await response.json()
+        const price = JSON.parse(json.prediction)
+        const safety = JSON.parse(json.safetyScore)
+        setPrice(price)
+        setSafetyScore(safety)
       }
     }
     catch(err) {
@@ -147,7 +164,7 @@ export default function MyPage() {
       <div className="flex h-full">
         <div className="basis-1/5 px-4 pb-16 overflow-y-scroll h-[100%]">
           <h1 className="mt-2 text-md font-bold">Estimate for new property</h1>
-          <form action="" method="" onSubmit={handleSubmit} encType="multipart/form-data" className="grid grid-cols-1 gap-4">
+          <form action="" method="" encType="multipart/form-data" className="grid grid-cols-1 gap-4">
             <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchData={searchData} setSearchData={setSearchData} setCoordinates={setCoordinates} setCity={setCity}></Searchbar>
             <div className="flex space-x-6">
               <div>
@@ -210,15 +227,15 @@ export default function MyPage() {
               <div className="flex flex-col gap-1">
                 <p className="font-semibold text-sm justify-around">Furnishing</p>
                 <div className="flex items-center gap-x-1">
-                  <input type="radio" name="furnishing" checked={furnishing === 'unfurnished'} onChange={() => setFurnishing('unfurnished')} />
+                  <input type="radio" name="furnishing" checked={furnishing === 'none'} onChange={() => setFurnishing('none')} />
                   <label className="text-sm">Unfurnished</label>
                 </div>
                 <div className="flex items-center gap-x-1">
-                  <input type="radio" name="furnishing" checked={furnishing === 'semi-furnished'} onChange={() => setFurnishing('semi-furnished')} />
+                  <input type="radio" name="furnishing" checked={furnishing === 'semi'} onChange={() => setFurnishing('semi')} />
                   <label className="text-sm">Semi-furnished</label>
                 </div>
                 <div className="flex items-center gap-x-1">
-                  <input type="radio" name="furnishing" checked={furnishing === 'furnished'} onChange={() => setFurnishing('furnished')} />
+                  <input type="radio" name="furnishing" checked={furnishing === 'complete'} onChange={() => setFurnishing('complete')} />
                   <label className="text-sm">Furnished</label>
                 </div>
               </div>
@@ -254,7 +271,7 @@ export default function MyPage() {
             </div>
             <div className="flex">
               <button type="button" onClick={resetForm} className="text-white bg-neutral-400 hover:bg-neutral-500 focus:ring-2 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Reset</button>
-              <button type="submit" className="focus:outline-none text-white bg-sky-500 hover:bg-sky-600 focus:ring-2 focus:ring-sky-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
+              <button type="submit" onClick={handleSubmit} className="focus:outline-none text-white bg-sky-500 hover:bg-sky-600 focus:ring-2 focus:ring-sky-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2">Calculate</button>
             </div>
           </form>
         </div>
@@ -265,7 +282,7 @@ export default function MyPage() {
         </div>
         <div className="flex flex-col basis-1/5 px-4 gap-4">
           <h1 className="mt-2 text-md font-bold">Results</h1>
-          <Metrics/>
+          <Metrics price={price} safetyScore={safetyScore}/>
           <BarChart chartData={chartDataFeature} chartLabels={chartLabelsFeature} label={labelFeature} />
           <BarChart chartData={chartDataPrice} chartLabels={chartLabelsPrice} label={labelPrice} />
         </div>
