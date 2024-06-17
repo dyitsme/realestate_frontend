@@ -74,9 +74,9 @@ export default function MyPage() {
   const [searchData, setSearchData] = useState([])
 
   //chart data
-  const chartDataFeature = [0.31, 0.39, 0.4, 0.792, 0.798, 0.95];
-  const chartLabelsFeature = ['text', 'text', 'text', 'text', 'text', 'text'];
-  const labelFeature = 'Feature Importance';
+  const [chartDataFeature, setChartDataFeature] = useState<number[]>([])
+  const [chartLabelsFeature, setChartLabelsFeature] = useState<string[]>([])
+  const labelFeature = 'Feature Importance'
 
   const chartDataPrice = [0.95, 0.798, 0.692, -0.5, -0.8, -0.89];
   const chartLabelsPrice = ['text', 'text', 'text', 'text', 'text', 'text'];
@@ -157,8 +157,15 @@ export default function MyPage() {
         const json = await response.json()
         const price = JSON.parse(json.prediction)
         const safety = JSON.parse(json.safetyScore)
+        const featureImportance = json.featureImportance
+
+        const features = featureImportance.map((item: any) => item.Feature)
+        const importances = featureImportance.map((item: any) => item.Importance)
+
         setPrice(price)
         setSafetyScore(safety.toFixed(2))
+        setChartLabelsFeature(features)
+        setChartDataFeature(importances)
       }
     }
     catch(err) {
