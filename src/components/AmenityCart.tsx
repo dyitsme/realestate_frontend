@@ -4,9 +4,15 @@ import amenitiesData from '../../data/AmenityData'
 const AmenityCard = ({ amenity, setAmenities }) => {
   const toggleAmenity = () => {
     setAmenities(prevAmenities =>
-      prevAmenities.map(item =>
-        item.amenity === amenity.amenity ? { ...item, isSelected: !item.isSelected, qty: !item.isSelected ? 1 : 0 } : item
-      )
+      prevAmenities.map(item => {
+        // item.amenity === amenity.amenity ? { ...item, isSelected: !item.isSelected, qty: !item.isSelected ? 1 : 0 } : item
+        if (item.amenity === amenity.amenity) {
+          const isSelected = !item.isSelected
+          const qty = isSelected ? 1 : 0
+          return { ...item, isSelected, qty }
+        }
+        return item
+      })
     )
   }
 
@@ -19,20 +25,23 @@ const AmenityCard = ({ amenity, setAmenities }) => {
     )
   }
 
+  if (amenity.amenity === 'dryer.1' || amenity.amenity === 'duct.1') {
+    return null
+  }
   return (
     <div className="flex justify-between bg-neutral-100 my-2 p-2 rounded-sm">
       <label className="flex items-center">
         <input type="checkbox" className="amenity-checkbox m-2" checked={amenity.isSelected} onChange={toggleAmenity}></input>
         <p className="text-sm text-neutral-700">{amenity.amenity}</p>
       </label>
-      <input
+      {/* <input
         type="number"
         value={amenity.qty}
         onChange={event => updateQty(Number(event.target.value))}
         disabled={!amenity.isSelected}
         className="block border border-neutral-400 focus:outline-none focus:outline-offset-[-1px] focus:outline-neutral-600 rounded-md p-1.5 max-w-12 mt-1 text-sm"
         min={amenity.isSelected ? 1 : 0}
-      ></input>
+      ></input> */}
     </div>
   )
 }
