@@ -74,13 +74,13 @@ export default function MyPage() {
   const [searchData, setSearchData] = useState([])
 
   //chart data
-  const chartDataFeature = [0.31, 0.39, 0.4, 0.792, 0.798, 0.95];
-  const chartLabelsFeature = ['text', 'text', 'text', 'text', 'text', 'text'];
-  const labelFeature = 'Feature Importance';
+  const [chartDataFeature, setChartDataFeature] = useState<number[]>([])
+  const [chartLabelsFeature, setChartLabelsFeature] = useState<string[]>([])
+  const labelFeature = 'Feature Importance'
 
-  const chartDataPrice = [0.95, 0.798, 0.692, -0.5, -0.8, -0.89];
-  const chartLabelsPrice = ['text', 'text', 'text', 'text', 'text', 'text'];
-  const labelPrice = 'Price Factors';
+  const [chartDataPrice, setChartDataPrice] = useState<number[]>([])
+  const [chartLabelsPrice, setChartLabelsPrice] = useState<string[]>([])
+  const labelPrice = 'Price Factors'
 
   const [price, setPrice] = useState(0)
   const [safetyScore, setSafetyScore] = useState(0)
@@ -157,8 +157,23 @@ export default function MyPage() {
         const json = await response.json()
         const price = JSON.parse(json.prediction)
         const safety = JSON.parse(json.safetyScore)
+        const featureImportance = json.featureImportance
+        const topNegative = json.top_negative
+        const topPositive = json.top_positive
+
+        const features = featureImportance.map((item: any) => item.Feature)
+        const importances = featureImportance.map((item: any) => item.Importance)
+
+        const priceFactors = topPositive.concat(topNegative)
+        const priceLabels = priceFactors.map((item: any) => item.feature)
+        const priceShapValues = priceFactors.map((item: any) => item.shap_value)
+
         setPrice(price)
         setSafetyScore(safety.toFixed(2))
+        setChartLabelsFeature(features)
+        setChartDataFeature(importances)
+        setChartLabelsPrice(priceLabels)
+        setChartDataPrice(priceShapValues)
       }
     }
     catch(err) {
