@@ -120,10 +120,16 @@ export default function MyPage() {
     const selectedAmenities = []
     for (let i = 0; i < amenities.length; i++) {
       if (amenities[i].isSelected === true) {
-        selectedAmenities.push(amenities[i])
+        selectedAmenities.push(amenities[i].amenity)
+        if (amenities[i].amenity === 'duct') {
+          selectedAmenities.push('duct.1')
+        }
+        if (amenities[i].amenity === 'dryer') {
+          selectedAmenities.push('dryer.1')
+        }
       }
     }
-
+    // console.log(selectedAmenities)
     data.append('coords', JSON.stringify(coordinates))
     data.append('city', city)
     data.append('bedrooms', bedrooms)
@@ -138,7 +144,7 @@ export default function MyPage() {
     data.append('furnishing', furnishing)
 
     data.append('propertyType', propertyType)
-    // data.append('amenities', JSON.stringify(selectedAmenities))
+    data.append('amenities', JSON.stringify(selectedAmenities))
     // data.append('amenities', 'gym')
     data.append('image', image)
 
