@@ -32,6 +32,11 @@ export default function About() {
             Keep in mind that these predictions are not expected to be completely accurate with the actual value of the property.
           </p>
           <div className="my-10">
+            <h2 className="text-xl font-semibold mb-2">Acknowledgements</h2>
+            We'd like to thank Kafa Studio from Iconscout for the illustrations and icons used.
+          </div>
+
+          <div className="my-10">
             <h2 className="text-xl font-semibold mb-2">Authors</h2>
             <ul className="list-disc pl-6">
               <li>Sean Iverson Caoile</li>

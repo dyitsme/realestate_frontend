@@ -85,6 +85,8 @@ export default function MyPage() {
   const [price, setPrice] = useState(0)
   const [safetyScore, setSafetyScore] = useState(0)
 
+  const [dataLoading, setDataLoading] = useState(false)
+
   const handleAddressChange = (e: any) => {
     setAddress(e.target.value);
   }
@@ -153,11 +155,14 @@ export default function MyPage() {
     }
     try {
       // don't forget to update url when deploying
+      setDataLoading(true)
       const url = 'http://localhost:5000/predict_xgb'
       const response = await fetch(url, {
         method: 'POST',
         body: data, 
       })
+
+
       if (response.ok) {
         // do something
         const json = await response.json()
@@ -180,6 +185,8 @@ export default function MyPage() {
         setChartDataFeature(importances)
         setChartLabelsPrice(priceLabels)
         setChartDataPrice(priceShapValues)
+
+        setDataLoading(false)
       }
     }
     catch(err) {
@@ -369,15 +376,15 @@ export default function MyPage() {
           </form>
         </div>
         <div className="flex-1 relative basis-3/5">
-          <div>
+            <div>
             <Map coords={coordinates} setCoords={setCoordinates} setSearchQuery={setSearchQuery} setCity={setCity} resetSearchResult={resetSearchResult}/>
           </div>
         </div>
         <div className="flex flex-col basis-1/5 px-4 gap-4">
           <h1 className="mt-2 text-md font-bold">Results</h1>
-          <Metrics price={price} safetyScore={safetyScore}/>
-          <BarChart chartData={chartDataFeature} chartLabels={chartLabelsFeature} label={labelFeature} />
-          <BarChart chartData={chartDataPrice} chartLabels={chartLabelsPrice} label={labelPrice} />
+          <Metrics price={price} safetyScore={safetyScore} dataLoading={dataLoading}/>
+          <BarChart chartData={chartDataFeature} chartLabels={chartLabelsFeature} label={labelFeature} dataLoading={dataLoading}/>
+          <BarChart chartData={chartDataPrice} chartLabels={chartLabelsPrice} label={labelPrice} dataLoading={dataLoading}/>
         </div>
       </div>
     </div>

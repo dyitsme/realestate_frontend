@@ -1,10 +1,11 @@
 import { CategoryScale, Chart } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import React from 'react';
+import SkeletonElement from './SkeletonElement';
 
 Chart.register(CategoryScale);
 
-const BarChart = ({ chartData, chartLabels, label }) => {
+const BarChart = ({ chartData, chartLabels, label, dataLoading }) => {
   // Create an array of objects with labels and data
   const combinedData = chartLabels.map((chartLabel, index) => ({
     label: chartLabel,
@@ -69,6 +70,12 @@ const BarChart = ({ chartData, chartLabels, label }) => {
       },
     },
   };
+
+  if (dataLoading) {
+    return (
+      <SkeletonElement height={"h-32"}/>
+    )
+  }
 
   return (
     <div>

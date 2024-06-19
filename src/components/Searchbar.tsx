@@ -88,7 +88,7 @@ const Searchbar = ({ searchQuery, setSearchQuery, searchData, setSearchData, set
 
         setSearchData(json.addresses.features);
       }
-    }, 500);
+    }, 250);
   }
 
   function handleFocus() {
