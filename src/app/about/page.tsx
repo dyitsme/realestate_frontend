@@ -33,7 +33,7 @@ export default function About() {
           </p>
           <div className="my-10">
             <h2 className="text-xl font-semibold mb-2">Acknowledgements</h2>
-            We'd like to thank Kafa Studio from Iconscout for the illustrations and icons used.
+            We'd like to thank Kafa Studio from Iconscout, Elegant Themes, and Flowbite for the illustrations and icons used.
           </div>
 
           <div className="my-10">
