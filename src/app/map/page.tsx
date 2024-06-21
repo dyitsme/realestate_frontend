@@ -123,12 +123,6 @@ export default function MyPage() {
     for (let i = 0; i < amenities.length; i++) {
       if (amenities[i].isSelected === true) {
         selectedAmenities.push(amenities[i].amenity)
-        if (amenities[i].amenity === 'duct') {
-          selectedAmenities.push('duct.1')
-        }
-        if (amenities[i].amenity === 'dryer') {
-          selectedAmenities.push('dryer.1')
-        }
       }
     }
     // console.log(selectedAmenities)

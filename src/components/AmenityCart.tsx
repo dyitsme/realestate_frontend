@@ -25,9 +25,6 @@ const AmenityCard = ({ amenity, setAmenities }) => {
     )
   }
 
-  if (amenity.amenity === 'dryer.1' || amenity.amenity === 'duct.1') {
-    return null
-  }
   return (
     <div className="flex justify-between bg-neutral-100 my-2 p-2 rounded-sm">
       <label className="flex items-center">
