@@ -153,7 +153,7 @@ export default function MyPage() {
       setDataLoading(true)
       // const url = 'http://localhost:5000/predict_xgb'
       const url = config.url
-      console.log(process.env.NEXT_PUBLIC_NODE_ENV)
+      console.log(process.env.NODE_ENV)
       const response = await fetch(url, {
         method: 'POST',
         body: data, 
