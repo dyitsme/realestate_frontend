@@ -8,6 +8,7 @@ import Metrics from '@/components/Metrics'
 import Searchbar from '@/components/Searchbar'
 import Image from 'next/image'
 import amenitiesData from '../../../data/AmenityData'
+import { config } from '@/Constants'
 
 export default function MyPage() {
   const Map = useMemo(() => dynamic(
@@ -150,7 +151,9 @@ export default function MyPage() {
     try {
       // don't forget to update url when deploying
       setDataLoading(true)
-      const url = 'http://localhost:5000/predict_xgb'
+      // const url = 'http://localhost:5000/predict_xgb'
+      const url = config.url
+      console.log(process.env.NEXT_PUBLIC_NODE_ENV)
       const response = await fetch(url, {
         method: 'POST',
         body: data, 
