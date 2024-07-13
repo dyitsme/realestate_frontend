@@ -4,4 +4,4 @@ const production = {
 const development = {
 url: 'http://localhost:5000/predict_xgb'  
 }
-export const config = process.env.NEXT_PUBLIC_NODE_ENV === 'production' ? production : development
+export const config = process.env.NODE_ENV === 'production' ? production : development
