@@ -1,5 +1,5 @@
 const production = {
-  url: 'https://standingcat.azurewebsites.net/predict_xgb'
+  url: 'http://standingtiger.eastasia.cloudapp.azure.com:8080/predict_xgb'
 }
 const development = {
 url: 'http://localhost:5000/predict_xgb'  
