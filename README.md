@@ -1,41 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Introduction 
+HomeBudget helps homebuyers, sellers, and investors make informed decisions on residential properties. It does this by giving an estimated price of the property based on its information and a photo of the exterior of the property. The application also displays other information such as the perceived safety surrounding the property and the property’s price factors.Home Budget predicts the property price, perceived safety score, price factors of a property within Pasig and Parañaque cities.
+
+<img src="public/homebudget.png">
+
 
 ## Getting Started
+Link can be accessed at https://homebudget-comet.vercel.app/
 
-First, install the necessary libraries:
+### Offline installation
+1. Clone the repository
+```
+git clone https://github.com/dyitsme/realestate_frontend.git
+```
+1. Have Node v21.6.1 installed [here](https://nodejs.org/en) 
+2. Install the necessary libraries:
 
 ```bash
 npm install
 ```
-Second, run the development server:
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Pages
+- `/` shows the landing page
+- `/map` displays the app dashboard
+- `/about` displays the about page
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
