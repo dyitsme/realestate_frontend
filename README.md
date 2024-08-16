@@ -25,9 +25,10 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 
+5. Head [here](https://github.com/dyitsme/realestate_backend) and follow the steps to install the server for this app.
 
 ## Pages
 - `/` shows the landing page
